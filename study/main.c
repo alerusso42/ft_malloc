@@ -1,0 +1,110 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/29 17:22:55 by alerusso          #+#    #+#             */
+/*   Updated: 2025/12/29 17:22:55 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+# include "test.h"
+# include "../../all.h"
+
+void	test();
+
+int	main2()
+{
+	char	*stringa = malloc_file(15, "per_malloc");
+	ft_strlcpy(stringa, "ciao", 5);
+	ft_printf(stringa);
+	return 1;
+}
+
+int	main()
+{
+	char		*s;
+	const int	size = 7;
+
+	ft_printf("stack starts with: %p,%p\n", &s, &size);
+	ft_printf("pagesize: %d\n", sysconf(_SC_PAGE_SIZE));
+	perror("Checking errno...");
+	s = malloc(size + 1);
+	perror("Checking errno...");
+	if (!s)
+		return (perror("Error\n"), 1);
+	for (int i = 0; i < size; i++)
+		s[i] = 'A' + i;
+	s[size] = 0;
+	write(1, s, size);
+	write(1, "\n", 1);
+	free(s);
+	test();
+	print_extreme(NULL, malloc_global_data(false), true);
+	ft_printf("Program end!\n");
+	ft_printf("Internal Leak check: ");
+	if (malloc_global_data(false)->bytes_alloc == malloc_global_data(false)->bytes_freed)
+		ft_printf("$GSuccess!$z\n");
+	else
+	{
+		ft_printf("$RLeak! $z%d allocated, %d freed\n", malloc_global_data(false)->bytes_alloc, malloc_global_data(false)->bytes_freed);
+		ft_printf("Total leak: %d\n", malloc_global_data(false)->bytes_alloc - malloc_global_data(false)->bytes_freed);
+	}
+	return (0);
+}
+
+void	test()
+{
+	int	i;
+	int	j;
+
+	daft_init("../../media", "SETTINGS.md");
+    daft_swap(2);
+	char	***matr = daft_get("CALYREX");
+	if (!matr)
+		return (daft_quit());
+	i = 0;
+	while (matr[i])
+	{
+		j = 0;
+		while (matr[i][j])
+		{
+			printf("%s\n", matr[i][j]);
+			j++;
+		}
+		i++;
+	}
+	char	***add = daft_append("SQUALO", 0, 0);
+	if (!add)
+		return (daft_quit());
+	i = 0;
+	while (add[i])
+	{
+		j = 0;
+		while (add[i][j])
+		{
+			printf("%s\n", add[i][j]);
+			j++;
+		}
+		i++;
+	}
+	daft_quit();
+}
+
+/*
+	first-freed
+	
+	++++
+	++
+	+
+	+-++-++-+-++-++++
+	/\
+   /  \
+  /    \
+ /\
+   \
+	\
+	 \
+*/

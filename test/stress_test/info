@@ -1,0 +1,4 @@
+this test uses daft, a library written by me that access big files data.
+This test calls daft_iter, a heap heavy function that:
+1)  loads all file data and metadata;
+2)  free all this data at the end of the program.
