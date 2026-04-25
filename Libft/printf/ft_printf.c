@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/06 16:59:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/04/25 15:45:43 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	type_print(t_ft_printf *data);
 static void	ansi_print(t_ft_printf *data);
 static void	exec_cmd(t_ft_printf *data);
+
 
 int	_ft_printf(int fd, const char *str, t_str *buff, va_list *ptr)
 {

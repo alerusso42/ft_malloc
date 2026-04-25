@@ -1,15 +1,6 @@
 Intra: **alerusso**
 GitHub: **alerusso42**
 
-⚠️ **Note:** The shared library compilation logic is currently missing; the Makefile is incomplete.
-However, you can still benchmark the custom allocator's performance against the system malloc.
-
-```bash
-cd test/
-chmod +x performance.sh
-./performance.sh
-```
-
 ---
 
 # ft_malloc
@@ -67,21 +58,55 @@ typedef struct s_area
 
 ---
 
+### TODO
+
+This project is not finished.
+Task to do before the evaluation:
+1. putting in the malloc shared library only a part of my libft, not everything
+2. add more test for the script performance.sh
+3. add tests in multithreading contexts
+4. fix ld_preload in shell.sh, that causes my malloc to segfault
+
+### Testing
+Two scripts are provided in the test/ directory to verify the allocator's stability and efficiency.
+
+#### performance.sh
+
+Benchmarks the allocator against the system's default malloc.
+⚠️ currently, only one test has been written.
+
+Execution: 
+```bash
+cd test/
+chmod +x performance.sh
+./performance.sh
+```
+
+#### shell.sh
+Run a new shell that uses this malloc implementation.
+⚠️ The shell crashes immediately. This needs debugging
+
+Execution:
+```bash
+cd test/
+chmod +x shell.sh
+./shell.sh
+```
+
 ### Usage
 
-⚠️ **Warning:** The shared library linking is currently under development. 
-Please run `performance.sh` in the `test/` directory for verification.
+1. Build the Library
+Compile the dynamic library by running make.
 
-Compile the project via `Makefile`:
+2. Integration
+To use the allocator in your C projects:
+
+Include the header: Copy malloc.h from the header/ directory into your project.
+
+Link the library: Ensure libft_malloc.so is in your project root and compile using the following flags:
+
 ```bash
-make
+cc your_code.c -L. -lft_malloc -Wl,-rpath,. -I./path/to/header
 ```
 
-To use the library in your projects:
-```c
-#include "ft_malloc.h"
-
-void *ptr = malloc(42);
-// ...
-free(ptr);
-```
+Note: The -Wl,-rpath,. flag tells the linker to look for the .so file in the current directory at runtime.

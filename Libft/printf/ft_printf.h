@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:16:24 by codespace         #+#    #+#             */
-/*   Updated: 2026/01/05 17:51:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/04/25 15:46:47 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

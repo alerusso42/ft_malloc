@@ -29,8 +29,8 @@ int	main(int ac, char **av)
 		ft_printf("$GSuccess!$z\n");
 	else
 	{
-		ft_printf("$RLeak! $z%d allocated, %d freed\n", mData.uordblks, mData.fordblks);
-		ft_printf("Total leak: %d\n", mData.uordblks - mData.fordblks);
+		//ft_printf("$RLeak! $z%d allocated, %d freed\n", mData.uordblks, mData.fordblks);
+		//ft_printf("Total leak: %d\n", mData.uordblks - mData.fordblks);
 	}
 	del_filedata();
 	// FILE	*f = fopen("/dev/tty", "w");
