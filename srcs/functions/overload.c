@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   overload.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 23:22:49 by alerusso          #+#    #+#             */
-/*   Updated: 2026/03/13 13:37:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/09/28 19:19:14 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void 	*reallocarray(void *ptr, size_t nmemb, size_t size)
 {
 	size_t	total;
 
+	if (!ptr)
+		return (calloc(nmemb, size));
 	total = nmemb * size;
 	if (total < nmemb || total < size)
 	{

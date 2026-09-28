@@ -180,6 +180,7 @@ int	main(int ac, char **av)
 	ft_printf("%s\n", s);
 	free(s);
 	test();
+	malloc_munmap_data();
 	//print_extreme(NULL, malloc_global_data(), true);
 	ft_printf("Program end!\n");
 	ft_printf("Internal Leak check: ");
@@ -261,19 +262,33 @@ int	main6()
 	return 0;
 }
 
-int	main7()//7
-{
-	void		*ptr;
-	int			stack_ptr;
-	uintptr_t	bad_ptr;
+// int	main7()//7
+// {
+// 	void		*ptr;
+// 	int			stack_ptr;
+// 	uintptr_t	bad_ptr;
 
-	ptr = malloc(69);
-	free(NULL);
-	free(&stack_ptr);
-	free((void *)1);
-	bad_ptr = (uintptr_t)ptr + 1;
-	free((void *)bad_ptr);
+// 	ptr = malloc(69);
+// 	free(NULL);
+// 	free(&stack_ptr);
+// 	free((void *)1);
+// 	bad_ptr = (uintptr_t)ptr + 1;
+// 	free((void *)bad_ptr);
+// 	free(ptr);
+// 	return (0);
+// }
+
+int	main8()
+{
+	void	*ptr;
+	void	*ptr2;
+
+	ptr = malloc(30);
+	ptr = realloc(ptr, 46);
+	ptr2 = malloc(472);
 	free(ptr);
+	free(ptr2);
+	return (0);
 }
 
 /*

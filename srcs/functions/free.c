@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/03/13 13:46:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/09/28 18:42:23 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void 	free(void *ptr)
 	t_memzone	*zone;
 
 	thread_safe(MALL_THREAD_LOCK);
+	DEBUG("FREE\n$Yptr$Z: %p\n", ptr);
 	data = malloc_global_data();
 	switch (identify_area(data, ptr))
 	{
@@ -91,6 +92,6 @@ static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 	if (zone->node.next)
 		zone->node.next->prev = zone->node.prev;
 	munmap_syscall(data, zone, zone->size);
-	if (!data->zone_tiny && !data->zone_small && !data->zone_large)
-		return (malloc_munmap_data());
+	// if (!data->zone_tiny && !data->zone_small && !data->zone_large)
+	// 	return (malloc_munmap_data());
 }

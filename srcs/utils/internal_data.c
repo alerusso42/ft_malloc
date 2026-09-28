@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   internal_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:54:33 by alerusso          #+#    #+#             */
-/*   Updated: 2026/04/25 14:46:37 by codespace        ###   ########.fr       */
+/*   Updated: 2026/09/28 19:13:54 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ void	thread_safe(t_malloc_thread_flag flags)
 	else if (flags & MALL_THREAD_LOCK)
 		error = pthread_mutex_lock(&mutex);
 	if (error == true)
-		return (fatal_malloc("pthread failure"), (void)0);
+	{
+		return (error_malloc("pthread failure"), (void)0);
+	}
 }
 
 //munmap of all malloc data
@@ -66,8 +68,6 @@ void malloc_munmap_data(void)
 {
 	t_alloc	*data;
 
-	thread_safe(MALL_THREAD_UNLOCK);
-	thread_safe(MALL_THREAD_LOCK);
 	data = malloc_global_data();
 	PRINT("$Ymunmap all$Z: freeing allocator memory\n");
 	if (data->zone_tiny)
@@ -105,8 +105,17 @@ static void __attribute__((destructor, used))	malloc_destructor(void)
 	thread_safe(MALL_THREAD_DESTROY);
 }
 
+// void	debug(int sig)
+// {
+// 	(void)sig;
+// 	write(1, "SIGSEGV", 7);
+// 	ft_printf("errno: %d\n", errno);
+// 	exit(1);
+// }
+
 static void __attribute__((constructor, used))	malloc_constructor(void)
 {
 	thread_safe(MALL_THREAD_CREATE);
+	// signal(SIGSEGV, debug);
 	malloc_global_data();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   show_alloc_mem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:52:32 by alerusso          #+#    #+#             */
-/*   Updated: 2026/03/13 13:54:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/09/28 17:32:22 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ void	show_alloc_mem_ex(uint32_t flags)
 	size_t	total;
 	int		index;
 
-	thread_safe(MALL_THREAD_LOCK);
+	// thread_safe(MALL_THREAD_LOCK);
 	data = malloc_global_data();
 	total = 0;
 	index = 0;
 	total += show_zone(data->zone_tiny, "TINY", &index, flags);
 	total += show_zone(data->zone_small, "SMALL", &index, flags);
 	total += show_zone(data->zone_large, "LARGE", &index, flags);
-	thread_safe(MALL_THREAD_UNLOCK);
+	// thread_safe(MALL_THREAD_UNLOCK);
 	ft_printf("$BTotal : %u bytes\n", total);
 }
 

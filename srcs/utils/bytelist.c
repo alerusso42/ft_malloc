@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bytelist.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 22:48:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/13 11:15:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/09/28 16:26:03 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ inline t_area	*bytelst_next(t_area *curr)
 {
 	t_area	*area;
 
+	DEBUG("byte split next: %p", curr);
 	if (!curr->next)
 		return (NULL);
 	area = ((void *)curr) + curr->next;
@@ -81,6 +82,7 @@ t_area	*bytelst_split(t_area *area, t_bytelist size)
 
 	if (!area || !size)
 		return (error_malloc("bytelst_split args error"));
+	DEBUG("byte split start");
 	next = bytelst_next(area);
 	new = ((void *)area) + size;
 	alignment = align_addr(new);
@@ -94,5 +96,6 @@ t_area	*bytelst_split(t_area *area, t_bytelist size)
 	{
 		next->prev = new->next;
 	}
+	DEBUG("byte split end");
 	return (new);
 }

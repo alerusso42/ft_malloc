@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/04/24 09:49:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/09/28 18:05:00 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdalign.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <signal.h>
+# include <errno.h>
 # include <limits.h>
 # include <sys/mman.h>
 # include <sys/unistd.h>

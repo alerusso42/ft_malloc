@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/03/13 13:52:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/09/28 19:14:52 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@ void 	*realloc(void *ptr, size_t size)
 	t_alloc		*data;
 	t_area		*area;
 
+	if (!ptr)
+		return (malloc(size));
 	thread_safe(MALL_THREAD_LOCK);
 	data = malloc_global_data();
+	DEBUG("REALLOC!\n$Ysize request$Z: %d\n$Yptr$Z: %p\n", size, ptr);
 	switch (identify_area(data, ptr))
 	{
 		case (MEM_ALLOC) :
 			area = ptr - sizeof(t_area);
-			if (area->next >= size)
+			if (area->next - sizeof(t_area) >= size)
 				return (thread_safe(MALL_THREAD_UNLOCK), ptr);
 			return (expand_mem(ptr, size));
 		case (MEM_FREED) :
@@ -59,6 +62,7 @@ static inline void	*expand_mem(void *ptr, size_t size)
 	void		*new_ptr;
 
 	thread_safe(MALL_THREAD_UNLOCK);
+	DEBUG("$GRealloc expand mem.$Z");
 	new_ptr = malloc(size);
 	if (!new_ptr)
 		return (free(ptr), fatal_malloc("Realloc failure"));

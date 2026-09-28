@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:17 by alerusso          #+#    #+#             */
-/*   Updated: 2026/03/13 13:47:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/09/28 14:21:39 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void 	*calloc(size_t nmemb, size_t size)
 	void		*ptr;
 	uintptr_t	area;
 
+	DEBUG("CALLOC\n$Ysize request$Z: %d\n$Ynmemb$Z: %p\n", size, nmemb);
 	total = nmemb * size;
 	if (!total)
 	{
@@ -39,5 +40,6 @@ void 	*calloc(size_t nmemb, size_t size)
 	ft_memset(ptr, 0, total);
 	area = ((uintptr_t)ptr) - sizeof(t_area);
 	((t_area *)area)->info |= MEM_SET;
+	DEBUG("$GCalloc success.$Z");
 	return (ptr);
 }

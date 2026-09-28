@@ -1,2 +1,3 @@
-a.out
-libft.a
+*.a
+*.out
+*.so

@@ -9,6 +9,7 @@ LIBFT="libft.a"
 cleanup()
 {
 	rm -f libft_malloc.so
+	rm -rf ../build
 }
 
 error()
@@ -20,9 +21,10 @@ error()
 }
 
 # 1)    compilation
+(cd ../ && make > /dev/null)
 cp > /dev/null ../$NAME ../build/$LIBFT . || \
-(echo compiling... ; cd ../ && make > /dev/null && cp build/libft.a libft_malloc.so test/ || error "Libft compilation")
+(echo compiling... ; make > /dev/null && cp build/libft.a libft_malloc.so test/ || error "Libft compilation")
 
 export LD_DEBUG=libs LD_PRELOAD="$PWD/$NAME"
 bash
-cleanup
+#cleanup
