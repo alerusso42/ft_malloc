@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   internal_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:54:33 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/28 19:13:54 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/09/29 11:50:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,8 @@ static void __attribute__((destructor, used))	malloc_destructor(void)
 // void	debug(int sig)
 // {
 // 	(void)sig;
-// 	write(1, "SIGSEGV", 7);
-// 	ft_printf("errno: %d\n", errno);
-// 	exit(1);
+// 	write(2, "SIGSEGV", 7);
+// 	err_printf("errno: %d\n", errno);
 // }
 
 static void __attribute__((constructor, used))	malloc_constructor(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:17 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/28 14:21:39 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/09/29 11:26:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,15 @@ void 	*calloc(size_t nmemb, size_t size)
 	uintptr_t	area;
 
 	DEBUG("CALLOC\n$Ysize request$Z: %d\n$Ynmemb$Z: %p\n", size, nmemb);
-	total = nmemb * size;
-	if (!total)
-	{
-		WARNING("calloc: %u-%u: EINVAL\n", nmemb, size);
-		return (NULL);
-	}	
-	if (total < nmemb || total < size)
+	if (nmemb && SIZE_MAX / nmemb < size)
 	{
 		WARNING("calloc: %u * %u overflows\n", nmemb, size);
 		return (NULL);
 	}
+	if (!nmemb || !size)
+		total = ALIGN;
+	else
+		total = nmemb * size;
 	ptr = malloc(total);
 	if (!ptr)
 		return (NULL);

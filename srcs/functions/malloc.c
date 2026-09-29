@@ -23,6 +23,8 @@ void 	*malloc(size_t size)
 	void		*ptr;
 
 	thread_safe(MALL_THREAD_LOCK);
+	if (size == 0)
+		size = ALIGN;
 	data = malloc_global_data();
 	if (data->error)
 		return (thread_safe(MALL_THREAD_UNLOCK), NULL);

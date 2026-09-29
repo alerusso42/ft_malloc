@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   overload.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 23:22:49 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/28 19:19:14 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/09/29 11:28:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,22 @@ void 	*reallocarray(void *ptr, size_t nmemb, size_t size)
 {
 	size_t	total;
 
-	if (!ptr)
-		return (calloc(nmemb, size));
-	total = nmemb * size;
-	if (total < nmemb || total < size)
+	if (nmemb && SIZE_MAX / nmemb < size)
 	{
 		WARNING("reallocarray: %u * %u overflows\n", nmemb, size);
 		return (NULL);
 	}
+	if (!nmemb || !size)
+		total = ALIGN;
+	else
+		total = nmemb * size;
 	return (realloc(ptr, total));
 }
 
 // align size using alignment. Then it's equal to a malloc call
 void	*memalign(size_t alignment, size_t size)
 {
+	ft_printf("memalign\n");
 	if (alignment < sizeof(void *) || (alignment & (alignment - 1)) != 0)
 	{
 		WARNING("memalign: alignment %u must be pow of 2, >= sizeof(ptr)\n", \
@@ -45,17 +47,20 @@ void	*memalign(size_t alignment, size_t size)
 // equal to a malloc call
 void	*valloc(size_t size)
 {
+	ft_printf("valloc\n");
 	return (malloc(size));
 }
 
 // equal to a malloc call
 void	*pvalloc(size_t size)
 {
+	ft_printf("pvalloc\n");
 	return (malloc(size));
 }
 
 // equal to a malloc call
 void	*xmalloc(size_t size)
 {
+	ft_printf("xmalloc\n");
 	return (malloc(size));
 }
