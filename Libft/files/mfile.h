@@ -6,17 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2026/04/23 12:19:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/02 13:53:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*free_matrix(void **matrix);
-void	*free_three_d_matrix(void ***matrix);
-
-// Memoria statica usata ---> (BUFFER_SIZE + 1) * ((MAX_FILES + 1) * 20)
 #ifndef MFILE_H
 # define MFILE_H
 # ifndef BUFFER_SIZE
+// Memoria statica usata ---> (BUFFER_SIZE + 1) * ((MAX_FILES + 1) * 20)
 #  define BUFFER_SIZE 1000
 # endif
 # ifndef MAX_FILES
@@ -33,11 +30,8 @@ void	*free_three_d_matrix(void ***matrix);
 # include <limits.h>
 # include "../libft.h"
 
-typedef struct s_fd
-{
-	int			p;
-	int			n;
-}	t_fd;
+void	*free_matrix(void **matrix);
+void	*free_three_d_matrix(void ***matrix);
 
 typedef struct s_manage_fds
 {
@@ -53,7 +47,7 @@ typedef struct s_manage_fds
 
 t_fd			openfd(const char *filename, const char *permissions);
 int				ft_open(const char *filename, const char *perm);
-t_manage_fds	*fd_database(bool);
+t_manage_fds	*fd_static_storage(bool);
 int				get_filedata(t_fd *fd, char **filename);
 void			del_filedata(void);
 int				switch_filedata(t_fd fd);

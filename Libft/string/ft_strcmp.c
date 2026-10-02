@@ -3,40 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 18:50:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:45:32 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/01 17:50:28 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
-
-//ANCHOR - str_cmp
-/*
-	Compares  the string object's buffer
-	with another string object or a char pointer.
-
-	@input:		[t_str *this]----->	pointer to string object
-				[const void *other]->pointer to another string object
-									or a char pointer
-	@return:	[int32_t]------->	result of comparison
-	@variables:	none
-	@usage:	*-------------------------------------------*	
-			|	int res = str_cmp(str, other);		|
-			|	//OR									|
-			|	int res = cmp(str, other);			|
-			|	//OR									|
-			|	int res = str->m->cmp(&str, other);	|
-			*-------------------------------------------*
-*/
-int32_t	str_cmp(t_str *this, const void *other)
-{
-	if (_str_identifier(other) == true)
-		return (str_cmp_str(this, other));
-	else
-		return (str_cmp_char(this, other));
-}
+#include "string_private.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -52,7 +27,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)(*s1) - (unsigned char)(*s2));
 }
 
-int32_t	str_cmp_char(t_str *this, const char *other)
+int32_t	_str_cmp_char(t_str *this, const char *other)
 {
 	register int32_t	n1;
 
@@ -67,7 +42,7 @@ int32_t	str_cmp_char(t_str *this, const char *other)
 	return ((uint8_t)(this->buff[n1]) - (uint8_t)(*other));
 }
 
-int32_t	str_cmp_str(t_str *this, const t_str *other)
+int32_t	_str_cmp_str(t_str *this, const t_str *other)
 {
 	register int32_t	n1;
 	register int32_t	n2;

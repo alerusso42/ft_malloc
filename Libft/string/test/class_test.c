@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   class_test.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 23:15:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:25:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/01 17:48:58 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "../string.h"
 
 void	psection(char *s)
 {
@@ -42,7 +42,11 @@ int	test1()
 	STR(s2, "ROCKY");
 	STR(s3, "");
 
-	sdup(&s3, &s2)->m->find(&s, &s2)->m->cut(&s, s.i, s.i + s2.len);
+	str_sdup(&s3, &s2);
+	str_find(&s, &s2);
+	// str_cut(&s, s.i, s.i + s2.len);
+	str_trim(&s, s2.len);
+	str_print(&s);
 	return (0);
 }
 
@@ -55,8 +59,11 @@ int	test2(void)
 	STR(s2, "str Rayquaza");
 	char	*trim_c = "str ";
 
-	find(&s1, &trim_s)->m->cut(&s1, s1.i, trim_s.len);
-	find(&s2, trim_c)->m->cut(&s2, s2.i, ft_strlen(trim_c));
+	str_find(&s1, &trim_s);
+	str_cut(&s1, s1.i, trim_s.len);
+	str_find(&s2, trim_c);
+	str_cut(&s2, s2.i, ft_strlen(trim_c));
+	str_print(&s1);
 	return (0);
 }
 
@@ -65,14 +72,16 @@ int	test3()
 	ptest("Prints string begin, half, end. Overrides char from begin to half");
 
 	STR(s, "MEGA_RAYQUAZA");
+	t_str_iterator	it;
 
-	printf("BEGIN[%s][%ld]\n", (char *)s.begin, s.begin);
-	printf("HALF[%s][%ld]\n", (char *)s.half, s.half);
-	printf("END[%s][%ld]\n", (char *)s.end, s.end);
+	it = str_get_iterator(&s);
+	ft_printf("BEGIN[%s][%d]\n", it.begin, it.begin);
+	ft_printf("HALF[%s][%d]\n", it.half, it.half);
+	ft_printf("END[%s][%d]\n", it.end, it.end);
 
-	for (uintptr_t i = s.begin; i < s.half; i++)
-		*(char *)i = 'A';
-	printf("%s\n", s.buff);
+	for (;it.i < it.half; it.i++)
+		*it.i = 'A';
+	str_print(&s);
 	return (0);
 }
 
@@ -86,10 +95,13 @@ int	test4(char **av)
 	{
 		for (int j = 0; av[i][j]; j++)
 		{
-			addr(&s, av[i][j]);
-			addl(&s, av[i][j]);
+			str_addr(&s, av[i][j]);
+			str_addl(&s, av[i][j]);
 		}
+		str_addr(&s, '\n');
+		str_addl(&s, '\n');
 	}
+	str_print(&s);
 	return (0);
 }
 
@@ -97,15 +109,14 @@ int	test5()
 {
 	ptest("Copy matrix until \\n");
 
-	STR(s, "                 ");
+	STR(s, NULL);
 	char	matr[5][8] = {"ciao,\n", " come\n", " stai?\n", ""};
 
 	for (int i = 0; matr[i][0]; i++)
 	{
-		printf("%s\n", s.buff);
-		excpy(&s, matr[i], "\n");
-		s.i += ft_strlen(matr[i]) - 1;
+		str_excpy(&s, matr[i], "\n");
 	}
+	str_print(&s);
 	return (0);
 }
 
@@ -115,7 +126,8 @@ int	test6()
 
 	STR(s, "38573847183471834701401840912841822110002321");
 
-	sort(&s);
+	str_sort(&s, NULL);
+	str_print(&s);
 	return (0);
 }
 
@@ -125,7 +137,8 @@ int	test7()
 
 	STR(s, "Ale Alle Allllle   -><-");
 
-	reverse(&s);
+	str_reverse(&s);
+	str_print(&s);
 	return (0);
 }
 
@@ -137,6 +150,8 @@ int	test8()
 	t_str	*s2;
 	t_str	*s3;
 
+	if (!STRING_GARBAGE_COLLECTOR)
+		return (0);
 	if (str_new(&s1, "s1") || str_new(&s2, "s2") || str_new(&s3, "s3"))
 		return (str_terminate(), 1);
 	str_delete(s1);
@@ -151,9 +166,15 @@ int	test_join(char *n1, char *n2)
 	ptest("Join");
 
 	STR(s, n1);
-	join(&s, "    Sum of ", 4)->m->push(&s, " with ")->m->push(&s, n2);
+	str_join(&s, "    Sum of ", 4);
+	str_push(&s, " with ");
+	str_push(&s, n2);
 	STR(s2, "//TERRA_DI_MEZZO");
-	s.set(&s, s.len / 2)->m->join(&s, &s2, 0)->m->find(&s, NULL)->m->trim(&s, s2.len);
+	s.i = s.len / 2;
+	str_join(&s, &s2, 0);
+	str_find(&s, "");
+	str_trim(&s, s2.len);
+	str_print(&s);
 	return (0);
 }
 
@@ -163,24 +184,23 @@ int	test_sum(char *n1, char *n2)
 
 	STR(s, n1);
 	STR(s2, n2);
-	STR(final, "");
+	STR(final, "the number is ");
 	int	temp1;
 	int	temp2;
 
 	if (!n1 || !n2)
 		return (1);
-	if (satoi(&s, &temp1) != 0 || satoi(&s2, &temp2) != 0)
+	if (str_satoi(&s, &temp1) != 0 || str_satoi(&s2, &temp2) != 0)
 		return (1);
 	temp1 = temp1 + temp2;
-	itoa(&final, temp1);
-	printf("Result:\t%s\n", final.buff);
+	final.i = final.len;
+	str_itoa(&final, temp1);
+	ft_printf("Result:\t%s\n", final.buff);
 	return (0);
 }
 
 //FIXME - 
 /*
-	1)	cpy, ncpy, scpy, join should move the iterator at the end of the copy;
-	2)	add a print function (later, when fd_printf available).
 */
 int	main(int ac, char **av)
 {

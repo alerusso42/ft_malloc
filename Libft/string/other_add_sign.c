@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   other_add_sign.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:05:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 15:28:14 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/01 17:21:21 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
 //ANCHOR - str_addr
 /*

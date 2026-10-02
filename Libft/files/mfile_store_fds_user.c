@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_store_fds_user.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:46:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 16:38:55 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/02 10:56:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_fd	openfd(const char *filename, const char *permissions)
 	t_fd			new_fd;
 	int				i;
 
-	data = fd_database(0);
+	data = fd_static_storage(0);
 	i = fd_indexation();
 	if (!data->fds[i].n)
 		return ((t_fd){0});
@@ -46,7 +46,7 @@ void	closefd(t_fd fd)
 {
 	t_manage_fds	*data;
 
-	data = fd_database(0);
+	data = fd_static_storage(0);
 	if (!data->fds[fd.n].n)
 		return ;
 	if (data->fds[fd.n].n == data->last)
@@ -69,7 +69,7 @@ int	get_filedata(t_fd *fd, char **filename)
 {
 	t_manage_fds	*data;
 
-	data = fd_database(0);
+	data = fd_static_storage(0);
 	if (fd)
 		*fd = data->curr_fd;
 	if (filename)
@@ -89,7 +89,7 @@ void	del_filedata(void)
 	t_manage_fds	*data;
 	int				i;
 
-	data = fd_database(0);
+	data = fd_static_storage(0);
 	i = 1;
 	while ("loop as long there are fd to close")
 	{
@@ -99,7 +99,7 @@ void	del_filedata(void)
 			closefd(data->fds[i]);
 		++i;
 	}
-	fd_database(1);
+	fd_static_storage(1);
 }
 
 /*
@@ -109,7 +109,7 @@ int	switch_filedata(t_fd fd)
 {
 	t_manage_fds	*data;
 
-	data = fd_database(0);
+	data = fd_static_storage(0);
 	data->curr_fd = data->fds[fd.n];
 	data->curr_file = data->filenames[fd.n];
 	if (!data->curr_fd.n || !data->curr_fd.p || !data->curr_file)

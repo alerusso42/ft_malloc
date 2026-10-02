@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_store_fds_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 08:43:17 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 17:43:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/02 10:56:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mfile.h"
 
 int				fd_indexation(void);
-t_manage_fds	*fd_database(bool delete);
+t_manage_fds	*fd_static_storage(bool delete);
 
 int	fd_indexation(void)
 {
 	t_manage_fds	*data;
 	int				i;
 
-	data = fd_database(0);
+	data = fd_static_storage(0);
 	i = 1;
 	while (data->fds[i].n && i != MAX_FILES)
 		++i;
@@ -30,7 +30,7 @@ int	fd_indexation(void)
 	return (i);
 }
 
-t_manage_fds	*fd_database(bool delete)
+t_manage_fds	*fd_static_storage(bool delete)
 {
 	static t_manage_fds	data;
 

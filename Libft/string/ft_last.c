@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_last.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:40:09 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/01 17:40:43 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
 //ANCHOR - str_last
 /*
@@ -30,38 +31,41 @@
 			|	str->m->last(&str, other);	|
 			*-------------------------------*
 */
-t_str	*str_last(t_str *this, const void *other)
-{
-	if (_str_identifier(other) == true)
-		return (str_last_str(this, other));
-	else
-		return (str_last_char(this, other));
-}
 
-t_str	*str_last_chr(t_str *this, char other)
+t_str	*_str_last_chr(t_str *this, char other)
 {
-	int32_t	i;
+	int32_t		i;
 
 	if (str_check(this, NULL))
 		return (_str_set_error(this, E_PARAM, "last"));
-	i = (int32_t)(this->end - this->begin) - 1;
+	if (this->len == 0)
+	{
+		this->i = 0;
+		return (this);
+	}
+	i = this->len - 1;
 	while (i > this->i && this->buff[i] != other)
 		i--;
 	if (i <= 0)
-		this->i = this->npos;
+		this->i = STRING_NPOS;
 	else
 		this->i = i;
 	return (this);
 }
 
-t_str	*str_last_char(t_str *this, const char *other)
+t_str	*_str_last_char(t_str *this, const char *other)
 {
 	int32_t	i;
 	int32_t	j;
 
 	if (str_check(this, NULL))
 		return (_str_set_error(this, E_PARAM, "last"));
-	i = (int32_t)(this->end - this->begin) - 1;
+	if (this->len == 0)
+	{
+		this->i = 0;
+		return (this);
+	}
+	i = this->len - 1;
 	j = 0;
 	while (i > this->i && this->buff[i] != other[j])
 	{
@@ -72,20 +76,25 @@ t_str	*str_last_char(t_str *this, const char *other)
 		i--;
 	}
 	if (i <= 0)
-		this->i = this->npos;
+		this->i = STRING_NPOS;
 	else
 		this->i = i;
 	return (this);
 }
 
-t_str	*str_last_str(t_str *this, const t_str *other)
+t_str	*_str_last_str(t_str *this, const t_str *other)
 {
 	int32_t	i;
 	int32_t	j;
 	
 	if (str_check(this, NULL))
 		return (_str_set_error(this, E_PARAM, "last"));
-	i = (int32_t)(this->end - this->begin) - 1;
+	if (this->len == 0)
+	{
+		this->i = 0;
+		return (this);
+	}
+	i = this->len - 1;
 	while (i > this->i && this->buff[i] != other->buff[j])
 	{
 		j = 0;
@@ -98,7 +107,7 @@ t_str	*str_last_str(t_str *this, const t_str *other)
 		i--;
 	}
 	if (i <= 0)
-		this->i = this->npos;
+		this->i = STRING_NPOS;
 	else
 		this->i = i;
 	return (this);

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cpy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 20:03:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:28:00 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/01 17:40:43 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
 //ANCHOR - str_cpy
 /*
@@ -31,15 +32,7 @@
 			|	str->m->cpy(&str, other);	|
 			*-------------------------------*
 */
-t_str	*str_cpy(t_str *this, const void *other)
-{
-	if (_str_identifier(other) == true)
-		return (str_cpy_str(this, other));
-	else
-		return (str_cpy_char(this, other));
-}
-
-t_str	*str_cpy_char(t_str *this, const char *other)
+t_str	*_str_cpy_char(t_str *this, const char *other)
 {
 	int32_t	i;
 	int32_t	j;
@@ -56,7 +49,7 @@ t_str	*str_cpy_char(t_str *this, const char *other)
 	return (this);
 }
 
-t_str	*str_cpy_str(t_str *this, const t_str *other)
+t_str	*_str_cpy_str(t_str *this, const t_str *other)
 {
 	int32_t	i;
 	int32_t	j;

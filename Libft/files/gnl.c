@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:38:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 17:02:36 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/02 10:56:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*get_static_buffer(int fd, bool reset, bool reset_all)
 	t_manage_fds	*data;
 	int				i;
 
-	data = fd_database(0);
+	data = fd_static_storage(0);
 	if (reset_all)
 	{
 		i = 1;

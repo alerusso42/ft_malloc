@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:26:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:43:11 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/01 17:21:21 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
 void	ft_sort_int(int *tab, int size)
 {
@@ -34,11 +35,12 @@ void	ft_sort_int(int *tab, int size)
 	}
 }
 
-void	ft_sort_str(char *tab)
+void	ft_sort_str(char *tab, int(*cmp)(int, int))
 {
-	int	i;
-	int	i2;
-	int	t;
+	int		i;
+	int		i2;
+	int		t;
+	bool	swap_bool;
 
 	i = -1;
 	while (tab[++i])
@@ -46,7 +48,11 @@ void	ft_sort_str(char *tab)
 		i2 = i;
 		while (tab[++i2])
 		{
-			if (tab[i] > tab[i2])
+			if (cmp)
+				swap_bool = cmp(tab[i], tab[i2]) > 0;
+			else
+				swap_bool = tab[i] > tab[i2];
+			if (swap_bool)
 			{
 				t = tab[i];
 				tab[i] = tab[i2];
@@ -73,11 +79,11 @@ void	ft_sort_str(char *tab)
 			|	str->m->reverse(&str);		|
 			*-------------------------------*
 */
-t_str	*str_sort(t_str *str)
+t_str	*str_sort(t_str *str, int(*cmp)(int, int))
 {
 	if (str_check(str, NULL))
 		return (_str_set_error(str, E_PARAM, "sort"));
-	ft_sort_str(str->buff);
+	ft_sort_str(str->buff, cmp);
 	return (str);
 }
 

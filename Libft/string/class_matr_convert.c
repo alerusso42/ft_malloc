@@ -11,6 +11,7 @@
 // /* ************************************************************************** */
 
 // #include "string.h"
+#include "string_private.h"
 
 // void	*str_matrix2_free(t_str **matrix);
 // void	*str_matrix3_free(t_str ***matrix);

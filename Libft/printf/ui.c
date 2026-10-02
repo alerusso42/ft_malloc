@@ -3,27 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ui.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 11:38:26 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/06 17:14:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/02 13:55:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 int	_ft_printf(int fd, const char *str, t_str *buff, va_list *ptr);
-
-int	tfd_printf(t_fd fd, const char *str, ...)
-{
-	int		n;
-	va_list	p;
-
-	va_start(p, str);
-	n = _ft_printf(fd.p, str, NULL, &p);
-	va_end(p);
-	return (n);
-}
 
 int	fd_printf(int fd, const char *str, ...)
 {
@@ -32,6 +21,17 @@ int	fd_printf(int fd, const char *str, ...)
 
 	va_start(p, str);
 	n = _ft_printf(fd, str, NULL, &p);
+	va_end(p);
+	return (n);
+}
+
+int	tfd_printf(t_fd fd, const char *str, ...)
+{
+	int		n;
+	va_list	p;
+
+	va_start(p, str);
+	n = _ft_printf(fd.p, str, NULL, &p);
 	va_end(p);
 	return (n);
 }

@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:16:24 by codespace         #+#    #+#             */
-/*   Updated: 2026/04/25 15:46:47 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/02 13:54:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include "../libft.h"
-#include "../files/mfile.h"
-#include "../string/string.h"
+# include "../libft.h"
+# include "../string/string.h"
 
-typedef struct s_fd t_fd;
 typedef struct s_str t_str;
+typedef struct s_fd t_fd;
 
 void	ft_putchar_fd(char c, t_fd fd);
 void	ft_putendl_fd(char *s, t_fd fd);

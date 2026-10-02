@@ -3,24 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:05:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:02:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/01 17:40:43 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
 char	*ft_strdup(const char *str);
-
-t_str	*str_sdup(t_str *this, const void *other)
-{
-	if (_str_identifier(other) == true)
-		return (str_sdup_str(this, other));
-	else
-		return (str_sdup_char(this, other));
-}
 
 char	*ft_strdup(const char *str)
 {
@@ -44,7 +37,7 @@ char	*ft_strdup(const char *str)
 	return (camillo);
 }
 
-t_str	*str_sdup_char(t_str *this, const char *other)
+t_str	*_str_sdup_char(t_str *this, const char *other)
 {
 	int	i;
 	int	j;
@@ -67,10 +60,11 @@ t_str	*str_sdup_char(t_str *this, const char *other)
 	while (other[j])
 		this->buff[i++] = other[j++];
 	this->buff[i] = 0;
+	this->i = 0;
 	return (this);
 }
 
-t_str	*str_sdup_str(t_str *this, const t_str *other)
+t_str	*_str_sdup_str(t_str *this, const t_str *other)
 {
 	int	i;
 	int	j;
@@ -93,5 +87,6 @@ t_str	*str_sdup_str(t_str *this, const t_str *other)
 	while (other->buff[j])
 		this->buff[i++] = other->buff[j++];
 	this->buff[i] = 0;
+	this->i = 0;
 	return (this);
 }

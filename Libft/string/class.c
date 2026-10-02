@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   class.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/02 12:09:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/01 17:21:21 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
-
-static void	_str_garbage_collector(t_str *p, bool delete);
+#include "string_private.h"
 
 //ANCHOR - _Str_constructor
 /*
@@ -28,14 +27,9 @@ t_str	_str_constructor(t_str *str, const char *buff)
 {
 	STR_LOG("%s\tconstructor\n", buff);
 	*str = (t_str){0};
-	str->_str_identifier = _STR_IDENTIFIER;
 	str->capacity = -1;
-	str->set = str_set_start_index;
-	if (_str_get_methods(str, false) != EXIT_SUCCESS)
+	if (str_sdup(str, buff)->err != 0)
 		return (*str);
-	if (sdup(str, buff)->err != 0)
-		return (*str);
-	str->npos = INT32_MAX;
 	_str_set(str);
 	return (*str);
 }
@@ -67,41 +61,6 @@ bool	str_new(t_str **str, const char *buff)
 	return (EXIT_SUCCESS);
 }
 
-//ANCHOR - _str_garbage_collector
-/*
-	!!!This function is private! It shouldn't be used!
-	
-	This is the garbage collection of heap string objects.
-
-	@input:		[t_str **str]----->	pointer to string object
-				[bool delete]----->	flag to indicate deletion
-	@return:	none
-	@variables:	[static t_list *garbage_list]--->	list of allocated strings;
-	
-//REVIEW
-//	1)	If delete is false, a new node is created in garbage_list;
-	2)	If p is NULL, all allocated strings are deleted;
-	3)	If p is the head of the list,
-		the head of the list is moved forward.
-*/
-static void	_str_garbage_collector(t_str *p, bool delete)
-{
-	static t_list	*garbage_list;
-
-	if (delete == false)
-	{
-		p->_garbage_coll_node = lst_new(p);
-		lst_back(&garbage_list, p->_garbage_coll_node);
-		return ;
-	}
-	if (!p)
-		return (lst_clear(&garbage_list, _str_destructor));
-	else if (p->_garbage_coll_node == garbage_list)
-	{
-		garbage_list = garbage_list->next;
-	}
-}
-
 //ANCHOR - _str_destructor
 /*
 	!!!This function is private! It shouldn't be used!
@@ -120,7 +79,6 @@ static void	_str_garbage_collector(t_str *p, bool delete)
 void	_str_destructor(void *str)
 {
 	STR_LOG("%s\tdestructor\n", ((t_str *)str)->buff);
-	_str_get_methods(NULL, false);
 	FREE(((t_str *)str)->buff);
 	if (((t_str *)str)->_garbage_coll_node)
 	{
@@ -144,5 +102,9 @@ void	_str_destructor(void *str)
 void	str_terminate(void)
 {
 	_str_garbage_collector(NULL, true);
-	_str_get_methods(NULL, true);
+}
+
+t_str	*str_print(t_str *this)
+{
+	return (ft_printf("%s\n", this->buff), this);
 }

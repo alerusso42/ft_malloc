@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/29 12:13:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/02 14:12:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void 	*realloc(void *ptr, size_t size)
 	t_alloc		*data;
 	t_area		*area;
 
-	ft_printf("<%u", size);
+	err_printf("<%u", size);
 	if (!ptr)
 		return (malloc(size));
 	if (size == 0)
@@ -39,7 +39,7 @@ void 	*realloc(void *ptr, size_t size)
 		case (MEM_ALLOC) :
 			area = ptr - sizeof(t_area);
 			if (area->next - sizeof(t_area) >= size)
-				return (thread_safe(MALL_THREAD_UNLOCK), ft_printf(">\n"), ptr);
+				return (thread_safe(MALL_THREAD_UNLOCK), err_printf(">\n"), ptr);
 			return (expand_mem(ptr, size));
 		case (MEM_FREED) :
 			WARNING("$RRealloc: $Z%p $Ralready freed$Z\n");

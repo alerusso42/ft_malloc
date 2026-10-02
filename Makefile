@@ -46,4 +46,4 @@ re: fclean $(NAME)
 
 
 libft:
-	(cd Libft/ && make all && cp libft.a $$OLDPWD/build && make fclean)
+	(cd Libft/ && make string && cp libft.a $$OLDPWD/build && make fclean)

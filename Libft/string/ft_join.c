@@ -3,46 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_join.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 22:52:27 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 23:10:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/01 17:50:42 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
 static t_str	*no_realloc(t_str *s, const char *s2, int32_t n, int32_t len);
 
-//ANCHOR - str_join
-/*
-	Appends the content of another string object or a char pointer
-	to the current string object.
-
-	@INDEX:		SET INDEX TO END OF JOINED CONTENT!
-	@input:		[t_str *this]----->	pointer to string object
-				[const void *other]->pointer to another string object
-									or a char pointer
-				[int32_t n]------->	number of characters to skip from other
-	@return:	[t_str *]--------->	pointer to this
-	@variables:	none
-	@usage:	*-------------------------------*	
-			|	str_join(str, other, n);	|
-			|	//OR						|
-			|	join(str, other, n);		|
-			|	//OR						|
-			|	str->m->join(&str, other, n);|
-			*-------------------------------*
-*/
-t_str	*str_join(t_str *this, const void *other, int32_t n)
-{
-	if (_str_identifier(other) == true)
-		return (str_join_str(this, other, n));
-	else
-		return (str_join_char(this, other, n));
-}
-
-t_str *str_join_str(t_str *s, const t_str *s2, int32_t n)
+t_str *_str_join_str(t_str *s, const t_str *s2, int32_t n)
 {
 	int32_t i;
 	char   *new_s;
@@ -67,7 +40,7 @@ t_str *str_join_str(t_str *s, const t_str *s2, int32_t n)
 	return (s);
 }
 
-t_str *str_join_char(t_str *s, const char *s2, int32_t n)
+t_str *_str_join_char(t_str *s, const char *s2, int32_t n)
 {
 	int32_t i;
 	int32_t len;

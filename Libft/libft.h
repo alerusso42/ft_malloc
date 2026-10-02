@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2026/04/23 14:06:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/02 13:53:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # endif
 # include <stdint.h>
 # include <stdlib.h>
-# include "files/mfile.h"
-# include "daft/daft.h"
+// # include "files/mfile.h"
+// # include "daft/daft.h"
 # include "data/list/list.h"
 # include "data/map/map.h"
 # include "printf/ft_printf.h"
@@ -36,12 +36,17 @@
 // used for malloc test
 # define TEST_DATA_DIR "../Libft/daft/DATA_DIR"
 
-typedef struct s_fd	t_fd;
 typedef struct s_list	t_list;
 typedef struct s_list2	t_list2;
 typedef struct s_manage_fds	t_manage_fds;
 typedef struct s_matr2	t_matr2;
 typedef struct s_matr3	t_matr3;
+
+typedef struct s_fd
+{
+	int			p;
+	int			n;
+}	t_fd;
 
 enum e_charsets
 {
@@ -112,12 +117,12 @@ void		lst2_iter(t_list2 *lst, void (*f)(void *));
 
 //		MATRIX
 
-int		matrix2_len(char **matr);
-int		matrix3_len(char ***matr);
-void	*_matrix2_del(t_matr2 *matr2);
-void	*_matrix3_del(t_matr3 *matr3);
-char	***ft_multi_split(char *s, char matr_c, char str_c);
-void	*matrix_convert(void *matr, int matr_type);
+// int		matrix2_len(char **matr);
+// int		matrix3_len(char ***matr);
+// void	*_matrix2_del(t_matr2 *matr2);
+// void	*_matrix3_del(t_matr3 *matr3);
+// char	***ft_multi_split(char *s, char matr_c, char str_c);
+// void	*matrix_convert(void *matr, int matr_type);
 
 //		PRINTF
 
@@ -137,20 +142,20 @@ int	uint_size(uint64_t n);
 
 //	FILE
 
-t_fd			openfd(const char *filename, const char *permissions);
-int				ft_open(const char *filename, const char *perm);
-t_manage_fds	*fd_database(bool);
-int				get_filedata(t_fd *fd, char **filename);
-void			del_filedata(void);
-int				switch_filedata(t_fd fd);
-int				fd_indexation(void);
-void			closefd(t_fd fd);
-int				read_curr(t_manage_fds *data, int count);
-int				readfd(t_fd	fd, char *buff, int count);
-char			*get_static_buffer(int fd, bool reset, bool reset_all);
-char			*gnl();
-int				writefd(t_fd fd, const char *s, size_t len);
-int				reset_fd(t_fd fd);
+// t_fd			openfd(const char *filename, const char *permissions);
+// int				ft_open(const char *filename, const char *perm);
+// t_manage_fds	*fd_static_storage(bool);
+// int				get_filedata(t_fd *fd, char **filename);
+// void			del_filedata(void);
+// int				switch_filedata(t_fd fd);
+// int				fd_indexation(void);
+// void			closefd(t_fd fd);
+// int				read_curr(t_manage_fds *data, int count);
+// int				readfd(t_fd	fd, char *buff, int count);
+// char			*get_static_buffer(int fd, bool reset, bool reset_all);
+// char			*gnl();
+// int				writefd(t_fd fd, const char *s, size_t len);
+// int				reset_fd(t_fd fd);
 
 // DAFT
 

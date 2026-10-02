@@ -3,33 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:46:25 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/01 17:40:43 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
-//ANCHOR - str_substr
-/*
-	Extracts a substring from another string object.
-
-	@input:		[t_str *this]----->	pointer to string object
-				[const t_str *other]->pointer to another string object
-				[int32_t start]--->	start index for substring
-				[int32_t end]----->	end index for substring
-	@return:	[t_str *]--------->	pointer to this
-	@variables:	none
-	@usage:	*-------------------------------*	
-			|	str_substr(str, other, start, end);|
-			|	//OR						|
-			|	substr(str, other, start, end);	|
-			|	//OR						|
-			|	str->m->substr(&str, other, start, end);|
-			*-------------------------------*
-*/
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	index;
@@ -58,9 +41,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substring);
 }
 
-t_str	*str_substr(t_str *this, const t_str *other, int32_t start, int32_t end)
+t_str	*_str_substr(t_str *this, const t_str *other, int32_t start, int32_t end)
 {
-	return (sdup(this, other)->m->cut(this, start, end));
+	str_sdup(this, other);
+	return (str_cut(this, start, end));
 }
 
 /*

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
 //ANCHOR - str_excpy
 /*
@@ -27,23 +28,30 @@
 	@return:	[t_str *]--------->	pointer to this
 	@variables:	none
 	@usage:	*---------------------------------------*	
-			|	str_incpy(str, other, set);		|
+			|	str_excpy(str, other, set);		|
 			|	//OR								|
-			|	incpy(str, other, set);			|
+			|	excpy(str, other, set);			|
 			|	//OR								|
 			|	str->m->incpy(&str, other, set);|
 			*---------------------------------------*
 */
-t_str	*str_excpy(t_str *this, const void *other, const void *set)
-{
-	const char	*charset;
 
-	if (_str_identifier(set) == true)
-		charset = ((const t_str *)set)->buff;
-	else
-		charset = (const char *)set;
-	if (_str_identifier(other) == true)
-		return (str_scpy_str(this, other, charset, EXCLUDE));
-	else
-		return (str_scpy_char(this, other, charset, EXCLUDE));
+t_str	*_str_excpy_char_char(t_str *this, const char *other, const char *set)
+{
+	return (_str_scpy(this, other, set, EXCLUDE));
+}
+
+t_str	*_str_excpy_str_char(t_str *this, const t_str *other, const char *set)
+{
+	return (_str_scpy(this, other->buff, set, EXCLUDE));
+}
+
+t_str	*_str_excpy_char_str(t_str *this, const char *other, const t_str *set)
+{
+	return (_str_scpy(this, other, set->buff, EXCLUDE));
+}
+
+t_str	*_str_excpy_str_str(t_str *this, const t_str *other, const t_str *set)
+{
+	return (_str_scpy(this, other->buff, set->buff, EXCLUDE));
 }

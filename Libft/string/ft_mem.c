@@ -3,31 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mem.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:43:14 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/06 16:24:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/01 17:40:43 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
-//ANCHOR - str_srealloc
-/*
-	Reallocates the internal buffer of the string object to a new size.
-
-	@input:		[t_str *this]----->	pointer to string object
-				[int32_t n]------->	new capacity size
-	@return:	[t_str *]--------->	pointer to this
-	@variables:	[char *temp]------>	temporary pointer to old buffer
-	@usage:	*-------------------------------*	
-			|	str_srealloc(str, n);		|
-			|	//OR						|
-			|	srealloc(str, n);			|
-			|	//OR						|
-			|	str->m->srealloc(&str, n);	|
-			*-------------------------------*
-*/
 t_str	*str_srealloc(t_str *this, int32_t n)
 {
 	char	*temp;
@@ -45,9 +30,10 @@ t_str	*str_srealloc(t_str *this, int32_t n)
 	i = this->i;
 	if (this->i > n)
 		i = n;
-	ncpy(this, temp, 0, this->len);
+	str_ncpy(this, temp, 0, this->len);
 	this->i = i;
 	FREE(temp);
+	this->buff[this->len] = 0;
 	return (this);
 }
 
@@ -71,7 +57,7 @@ t_str	*str_srealloc(t_str *this, int32_t n)
 	If you access the string object after calling this function,
 	it will lead to undefined behavior.
 */
-t_str	*str_delete(t_str *this)
+t_str	*_str_delete(t_str *this)
 {
 	if (!this)
 		return (NULL);

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_first.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:38:44 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/01 17:40:43 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
 //ANCHOR - str_first
 /*
@@ -30,15 +31,7 @@
 			|	str->m->first(&str, other);	|
 			*-------------------------------*
 */
-t_str	*str_first(t_str *this, const void *other)
-{
-	if (_str_identifier(other) == true)
-		return (str_first_str(this, other));
-	else
-		return (str_first_char(this, other));
-}
-
-t_str	*str_first_chr(t_str *this, char other)
+t_str	*_str_first_chr(t_str *this, char other)
 {
 	char	chr[2];
 
@@ -49,7 +42,7 @@ t_str	*str_first_chr(t_str *this, char other)
 	return (this);
 }
 
-t_str	*str_first_char(t_str *this, const char *other)
+t_str	*_str_first_char(t_str *this, const char *other)
 {
 	if (str_check(this, NULL))
 		return (_str_set_error(this, E_PARAM, "find"));
@@ -57,7 +50,7 @@ t_str	*str_first_char(t_str *this, const char *other)
 	return (this);
 }
 
-t_str	*str_first_str(t_str *this, const t_str *other)
+t_str	*_str_first_str(t_str *this, const t_str *other)
 {
 	if (str_check(this, NULL))
 		return (_str_set_error(this, E_PARAM, "find"));

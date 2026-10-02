@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
 //ANCHOR - str_incpy
 /*
@@ -33,21 +34,8 @@
 			|	str->m->incpy(&str, other, set);|
 			*---------------------------------------*
 */
-t_str	*str_incpy(t_str *this, const void *other, const void *set)
-{
-	const char	*charset;
 
-	if (_str_identifier(set) == true)
-		charset = ((const t_str *)set)->buff;
-	else
-		charset = (const char *)set;
-	if (_str_identifier(other) == true)
-		return (str_scpy_str(this, other, charset, INCLUDE));
-	else
-		return (str_scpy_char(this, other, charset, INCLUDE));
-}
-
-t_str	*str_scpy_char(t_str *this, const char *other, const char *set, int m)
+t_str	*_str_scpy(t_str *this, const char *other, const char *set, int m)
 {
 	int32_t	len;
 
@@ -55,19 +43,30 @@ t_str	*str_scpy_char(t_str *this, const char *other, const char *set, int m)
 	if (str_check(this, other) || !set)
 		return (_str_set_error(this, E_PARAM, "scpy"));
 	if (len > this->capacity - this->i)
-		if (str_srealloc(this, len + _STR_REALLOC_SIZE) != 0)
+		if (str_srealloc(this, len + _STR_REALLOC_SIZE)->err != 0)
 			return (_str_set_error(this, E_ALLOC, "scpy"));
-	this->i += sub_strcpy(this->buff + this->i, other, set, m);
+	len = sub_strcpy(this->buff + this->i, other, set, m);
+	this->len += len;
+	this->i += len;
 	return (this);
 }
 
-t_str	*str_scpy_str(t_str *this, const t_str *other, const char *set, int m)
+t_str	*_str_incpy_char_char(t_str *this, const char *other, const char *set)
 {
-	if (str_check(this, other) || !set)
-		return (_str_set_error(this, E_PARAM, "scpy"));
-	if (other->len > this->capacity - this->i)
-		if (str_srealloc(this, other->len + _STR_REALLOC_SIZE) != 0)
-			return (_str_set_error(this, E_ALLOC, "scpy"));
-	this->i += sub_strcpy(this->buff + this->i, other->buff, set, m);
-	return (this);
+	return (_str_scpy(this, other, set, INCLUDE));
+}
+
+t_str	*_str_incpy_str_char(t_str *this, const t_str *other, const char *set)
+{
+	return (_str_scpy(this, other->buff, set, INCLUDE));
+}
+
+t_str	*_str_incpy_char_str(t_str *this, const char *other, const t_str *set)
+{
+	return (_str_scpy(this, other, set->buff, INCLUDE));
+}
+
+t_str	*_str_incpy_str_str(t_str *this, const t_str *other, const t_str *set)
+{
+	return (_str_scpy(this, other->buff, set->buff, INCLUDE));
 }

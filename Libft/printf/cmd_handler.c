@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 11:23:54 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/06 16:51:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/01 13:46:13 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static void	cmd_get_val(t_ft_printf *data, int64_t *val, int cmd)
 
 static void	cmd_get_str(t_ft_printf *data, void **ptr, t_str **arr, int cmd)
 {
-	arr[cmd]->m->str_excpy(arr[cmd], data->s, "-?");
+	str_excpy(arr[cmd], data->s, "-?");
 	ptr[cmd] = (void *)arr[cmd]->buff;
 	data->cmd_flags |= PTR1 << cmd;
 }

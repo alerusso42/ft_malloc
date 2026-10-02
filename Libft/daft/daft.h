@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/16 22:12:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/02 13:50:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DAFT_H
 
 # include "../libft.h"
+# include "../files/mfile.h"
 
 /*WARNING: 	don't modify this file directly!
 			modify SETTINGS.md instead!

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:47:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:44:52 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/01 17:41:53 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include "string_private.h"
 
 //ANCHOR - str_ncmp
 /*
@@ -31,13 +32,6 @@
 			|	int res = str->m->ncmp(&str, other, n);	|
 			*-------------------------------------------*
 */
-int32_t	str_ncmp(t_str *this, const void *other, int32_t n)
-{
-	if (_str_identifier(other) == true)
-		return (str_ncmp_str(this, other, n));
-	else
-		return (str_ncmp_char(this, other, n));
-}
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -51,7 +45,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)(*s1) - (unsigned char)(*s2));
 }
 
-int32_t	str_ncmp_char(t_str *this, const char *other, int32_t n)
+int32_t	_str_ncmp_char(t_str *this, const char *other, int32_t n)
 {
 	register int32_t	n1;
 
@@ -67,7 +61,7 @@ int32_t	str_ncmp_char(t_str *this, const char *other, int32_t n)
 	return ((uint8_t)(this->buff[n1]) - (uint8_t)(*other));
 }
 
-int32_t	str_ncmp_str(t_str *this, const t_str *other, int32_t n)
+int32_t	_str_ncmp_str(t_str *this, const t_str *other, int32_t n)
 {
 	register int32_t	n1;
 	register int32_t	n2;

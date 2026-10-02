@@ -23,18 +23,18 @@ PATH_STRING =		string
 
 #SECTION - filepaths
 
-SRC_ALGORYTHM =	$(addprefix $(PATH_BFS)/, $(shell ls $(PATH_BFS) | grep \\.c))
-SRC_CHECKS =	$(addprefix $(PATH_CHECKS)/, $(shell ls $(PATH_CHECKS) | grep \\.c))
-SRC_DAFT =		$(addprefix $(PATH_DAFT_PREP)/, $(shell ls $(PATH_DAFT_PREP) | grep \\.c)) 	\
-				$(addprefix $(PATH_DAFT_PROG)/, $(shell ls $(PATH_DAFT_PROG) | grep \\.c))
-SRC_DATA =		$(addprefix $(PATH_DATA_MATR)/, $(shell ls $(PATH_DATA_MATR) | grep \\.c)) \
-				$(addprefix $(PATH_DATA_LIST)/, $(shell ls $(PATH_DATA_LIST) | grep \\.c)) \
-				$(addprefix $(PATH_DATA_MAP)/, $(shell ls $(PATH_DATA_MAP) | grep \\.c))
-SRC_FILES =		$(addprefix $(PATH_FILES)/, $(shell ls $(PATH_FILES) | grep \\.c))
-SRC_MATH =		$(addprefix $(PATH_MATH)/, $(shell ls $(PATH_MATH) | grep \\.c))
-SRC_MEM =		$(addprefix $(PATH_MEM)/, $(shell ls $(PATH_MEM) | grep \\.c))
-SRC_PRINTF =	$(addprefix $(PATH_PRINTF)/, $(shell ls $(PATH_PRINTF) | grep \\.c))
-SRC_STRING =	$(addprefix $(PATH_STRING)/, $(shell ls $(PATH_STRING) | grep \\.c))
+SRC_ALGORYTHM =	$(addprefix $(PATH_BFS)/, $(shell ls $(PATH_BFS) 2>/dev/null | grep \\.c))
+SRC_CHECKS =	$(addprefix $(PATH_CHECKS)/, $(shell ls $(PATH_CHECKS) 2>/dev/null | grep \\.c))
+SRC_DAFT =		$(addprefix $(PATH_DAFT_PREP)/, $(shell ls $(PATH_DAFT_PREP) 2>/dev/null | grep \\.c)) 	\
+				$(addprefix $(PATH_DAFT_PROG)/, $(shell ls $(PATH_DAFT_PROG) 2>/dev/null | grep \\.c))
+SRC_DATA =		$(addprefix $(PATH_DATA_MATR)/, $(shell ls $(PATH_DATA_MATR) 2>/dev/null | grep \\.c)) \
+				$(addprefix $(PATH_DATA_LIST)/, $(shell ls $(PATH_DATA_LIST) 2>/dev/null | grep \\.c)) \
+				$(addprefix $(PATH_DATA_MAP)/, $(shell ls $(PATH_DATA_MAP) 2>/dev/null | grep \\.c))
+SRC_FILES =		$(addprefix $(PATH_FILES)/, $(shell ls $(PATH_FILES) 2>/dev/null | grep \\.c))
+SRC_MATH =		$(addprefix $(PATH_MATH)/, $(shell ls $(PATH_MATH) 2>/dev/null | grep \\.c))
+SRC_MEM =		$(addprefix $(PATH_MEM)/, $(shell ls $(PATH_MEM) 2>/dev/null | grep \\.c))
+SRC_PRINTF =	$(addprefix $(PATH_PRINTF)/, $(shell ls $(PATH_PRINTF) 2>/dev/null | grep \\.c))
+SRC_STRING =	$(addprefix $(PATH_STRING)/, $(shell ls $(PATH_STRING) 2>/dev/null | grep \\.c))
 
 #SECTION - modules
 
@@ -42,11 +42,11 @@ ALL =				$(SRC_ALGORYTHM) $(SRC_CHECKS) $(SRC_DAFT) $(SRC_DATA) $(SRC_FILES) $(S
 MODULE_ALGORYTHM = 	$(SRC_ALGORYTHM) $(SRC_DATA) $(SRC_MEM)
 MODULE_CHECKS = 	$(SRC_CHECKS)
 MODULE_DAFT = 		$(SRC_DAFT) $(SRC_CHECKS) $(SRC_FILES) $(SRC_MATH) $(SRC_MEM) $(SRC_PRINTF) $(SRC_STRING)
-MODULE_FILES = 		$(SRC_DAFT) $(SRC_CHECKS) $(SRC_FILES) $(SRC_MATH) $(SRC_MEM) $(SRC_PRINTF) $(SRC_STRING)
+MODULE_FILES = 		$(SRC_CHECKS) $(SRC_FILES) $(SRC_MATH) $(SRC_MEM) $(SRC_PRINTF) $(SRC_STRING)
 MODULE_MATH = 		$(SRC_MATH)
-MODULE_MEM = 		$(SRC_MEM) $(SRC_STRING)
-MODULE_PRINTF = 	$(SRC_PRINTF) $(SRC_STRING)
-MODULE_STRING = 	$(SRC_STRING) $(SRC_CHECKS) $(SRC_DATA) $(SRC_MEM) $(SRC_PRINTF)
+MODULE_MEM = 		$(SRC_MEM)
+MODULE_PRINTF = 	$(SRC_PRINTF) $(SRC_STRING) $(SRC_CHECKS) $(SRC_DATA) $(SRC_MEM) $(SRC_MATH)
+MODULE_STRING = 	$(SRC_PRINTF) $(SRC_STRING) $(SRC_CHECKS) $(SRC_DATA) $(SRC_MEM) $(SRC_MATH)
 
 #SECTION - object declaration
 
@@ -99,17 +99,17 @@ string: $(OBJ_STRING)
 	ar rcs $(NAME) $(OBJ_STRING)
 
 help:
-	@echo "\033[33mList of all modules:\n"\
-			"all,\n"\
-			"algorythm,\n"\
-			"checks,\n"\
-			"daft,\n"\
-			"data,\n"\
-			"files,\n"\
-			"math,\n"\
-			"mem,\n"\
-			"printf,\n"\
-			"string,\n\033[0m"
+	@echo "List of all modules:\n\033[33m"\
+			"all\n"\
+			"algorythm\n"\
+			"checks\n"\
+			"daft\n"\
+			"data\n"\
+			"files\n"\
+			"math\n"\
+			"mem\n"\
+			"printf\n"\
+			"string\033[0m"
 
 $(OBJ_DIR) : 
 	mkdir -p $(OBJ_DIR)
