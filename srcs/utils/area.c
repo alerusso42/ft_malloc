@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   area.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/28 16:40:18 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/07 17:29:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ t_memzone	*area_freed(t_area *area)
 	}
 	if (zone->longest_chunk < area->next)
 		zone->longest_chunk = area->next;
-	else if (DEBUG_FLAG == false)
-		VALGRIND_FREELIKE_BLOCK((void *)area + sizeof(t_area), 0);
+	// else if (DEBUG_FLAG == false)
+	// 	// VALGRIND_FREELIKE_BLOCK((void *)area + sizeof(t_area), 0);
 	return (zone);
 }
 

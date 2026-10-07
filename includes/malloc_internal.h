@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/28 18:05:00 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/07 17:21:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 #  define WARNING(s, ...)	(void)0
 # endif
 //FIXME - da togliere!
-#include <valgrind/memcheck.h>
+// #include <valgrind/memcheck.h>
 
 # define ALIGN alignof(max_align_t)
 

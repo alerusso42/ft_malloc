@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/28 18:42:23 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/07 17:21:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	free_correct_area(t_alloc *data, void *ptr)
 	}
 	else if (DEBUG_FLAG == false)
 	{
-		VALGRIND_FREELIKE_BLOCK((void *)area + sizeof(t_area), 0);
+		// VALGRIND_FREELIKE_BLOCK((void *)area + sizeof(t_area), 0);
 	}
 }
 

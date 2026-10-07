@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/28 16:20:41 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/07 17:30:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	*mmap_syscall(t_alloc *data, uint32_t len)
 	if (data->ptr_min > ptr)
 		data->ptr_min = ptr;
 	data->bytes_alloc += len;
-	if (DEBUG_FLAG == true)
-		VALGRIND_MALLOCLIKE_BLOCK(ptr, len, 0, false);
+	// if (DEBUG_FLAG == true)
+	// 	VALGRIND_MALLOCLIKE_BLOCK(ptr, len, 0, false);
 	return (ptr);
 }
 
@@ -73,8 +73,8 @@ bool	munmap_syscall(t_alloc *data, void *ptr, uint32_t len)
 	if (munmap(ptr, len) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	data->bytes_freed += len;
-	if (DEBUG_FLAG == true)
-		VALGRIND_FREELIKE_BLOCK(ptr, 0);
+	// if (DEBUG_FLAG == true)
+	// 	VALGRIND_FREELIKE_BLOCK(ptr, 0);
 	return (EXIT_SUCCESS);
 }
 

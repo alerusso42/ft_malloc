@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 # include "../includes/malloc_internal.h"
+# include "../Libft/daft/daft.h"
+# include "../Libft/files/mfile.h"
 
 void	test(void);
 

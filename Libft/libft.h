@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/02 13:53:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/07 17:30:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # endif
 # include <stdint.h>
 # include <stdlib.h>
+# include <stdarg.h>
 // # include "files/mfile.h"
 // # include "daft/daft.h"
 # include "data/list/list.h"

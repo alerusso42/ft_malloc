@@ -6,7 +6,7 @@ ifeq ($(HOSTTYPE),)
 endif
 
 BUILD := build
-NAME := $(BUILD)/libft_malloc_$(HOSTTYPE).so
+NAME := $(BUILD)/output/libft_malloc_$(HOSTTYPE).so
 LINK_NAME := libft_malloc.so
 FILE := test_file
 LIBFT := $(BUILD)/libft.a
@@ -21,6 +21,7 @@ OBJ := $(patsubst %.c, $(BUILD)/%.o, $(SRC))
 # without this, all the entire libc would be put into libft.malloc.so
 
 $(NAME): $(OBJ) $(LIBFT)
+	mkdir -p $(BUILD)/output/
 	cc -Wall -Wextra -Werror -shared -g \
         $(OBJ) \
         -Wl,--whole-archive $(LIBFT) -Wl,--no-whole-archive \
@@ -40,10 +41,10 @@ clean:
 	rm -rf $(OBJ)
 
 fclean: clean
-	rm -rf a.out libft.a libft_malloc.so build/*
+	rm -rf a.out libft.a libft_malloc.so build
 
 re: fclean $(NAME)
 
 
 libft:
-	(cd Libft/ && make string && cp libft.a $$OLDPWD/build && make fclean)
+	(cd Libft/ && make all && cp libft.a $$OLDPWD/build && make fclean)

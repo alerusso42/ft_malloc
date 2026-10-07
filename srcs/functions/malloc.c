@@ -38,7 +38,7 @@ void 	*malloc(size_t size)
 		ptr = get_mem(data, size, &data->zone_tiny, data->size_zone.tiny);
 	if (DEBUG_FLAG == false && ptr)
 	{
-		VALGRIND_MALLOCLIKE_BLOCK(ptr, size, 0, false);
+		// VALGRIND_MALLOCLIKE_BLOCK(ptr, size, 0, false);
 	}
 	thread_safe(MALL_THREAD_UNLOCK);
 	DEBUG("$Ysize request$Z: %d\n$Yreturned ptr$Z: %p\n", size, ptr);
