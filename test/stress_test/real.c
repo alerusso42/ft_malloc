@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 # include "../../Libft/libft.h"
+#include "../../Libft/daft/daft.h"
+#include "../../Libft/files/mfile.h"
 # include <malloc.h>
 
 void	test();
