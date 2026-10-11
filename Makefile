@@ -22,7 +22,7 @@ OBJ := $(patsubst %.c, $(BUILD)/%.o, $(SRC))
 
 $(NAME): $(OBJ) $(LIBFT)
 	mkdir -p $(BUILD)/output/
-	cc -Wall -Wextra -Werror -shared -g \
+	gcc -Wall -Wextra -Werror -shared -g \
         $(OBJ) \
         -Wl,--whole-archive $(LIBFT) -Wl,--no-whole-archive \
         -o $(NAME)
@@ -30,7 +30,7 @@ $(NAME): $(OBJ) $(LIBFT)
 
 $(BUILD)/%.o: %.c
 	mkdir -p $(dir $@)
-	cc -Wall -Wextra -Werror -fPIC -g -c $< -o $@
+	gcc -Wall -Wextra -Werror -fPIC -g -c $< -o $@
 
 $(LIBFT): 
 	make libft
@@ -47,4 +47,4 @@ re: fclean $(NAME)
 
 
 libft:
-	(cd Libft/ && make all && cp libft.a $$OLDPWD/build && make fclean)
+	(cd Libft/ && make string && cp libft.a $$OLDPWD/build && make fclean)
