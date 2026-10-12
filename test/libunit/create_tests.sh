@@ -873,15 +873,15 @@ LIBUNITmain()
 {
 	LIBUNITutils_setup
 	LIBUNITconf_parse
-	LIBUNITsync_backup_files
-	LIBUNITutils_foreach_test LIBUNITsync_rename_files
-	LIBUNITutils_foreach_module LIBUNITsync_backup_template
+	#LIBUNITsync_backup_files
+	#LIBUNITutils_foreach_test LIBUNITsync_rename_files
+	#LIBUNITutils_foreach_module LIBUNITsync_backup_template
 	LIBUNITcreate_files
 	LIBUNITcreate_makefile
 	LIBUNITcreate_header
 	LIBUNITcreate_main
 	LIBUNITcreate_launcher
-	LIBUNITutils_foreach_file LIBUNITsync_delete_empty_dir "$G_BACKUP_DIR"
+	#LIBUNITutils_foreach_file LIBUNITsync_delete_empty_dir "$G_BACKUP_DIR"
 	LIBUNITutils_foreach_file LIBUNITsync_delete_empty_dir "$G_TARGET_DIR"
 	for module in "${!G_MODULES[@]}";do
 		echo "$module:	" "${G_MODULES["$module"]}"

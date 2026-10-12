@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/07 17:21:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/12 22:08:26 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define DEBUG_FLAG false
 # define DEBUG_TIMESTAMP "$GMalloc: $Z"
 # if DEBUG_FLAG == true
-#  define DEBUG(s, ...) (void)err_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
+#  define DEBUG(s, ...) (void)ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define DEBUG(s, ...)	(void)0
 # endif
@@ -48,7 +48,7 @@
 #  define WARNING(s, ...)	(void)0
 # endif
 //FIXME - da togliere!
-// #include <valgrind/memcheck.h>
+# include <valgrind/memcheck.h>
 
 # define ALIGN alignof(max_align_t)
 
@@ -216,18 +216,10 @@ typedef enum e_malloc_thread_flag
 	MALL_THREAD_DESTROY = 1 << 3,
 }	t_malloc_thread_flag;
 
-void 	*malloc(size_t size);
-void 	free(void *ptr);
-void 	*realloc(void *ptr, size_t size);
-void	show_alloc_mem();
-
-//SECTION - testing
-
-void 	*malloc_file(uint32_t size, const char *file);
-void 	*malloc_virtualfile(uint32_t size, const char *file);
-void 	*malloc_tempfile(uint32_t size);
-void	*malloc_anonymous(uint32_t size);
-void 	print_extreme(void *p, t_alloc *dt, bool print);
+void 		*malloc(size_t size);
+void 		free(void *ptr);
+void 		*realloc(void *ptr, size_t size);
+void		show_alloc_mem();
 
 //SECTION - utils
 

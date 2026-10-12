@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libunit.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 18:10:34 by alerusso          #+#    #+#             */
-/*   Updated: 2026/06/28 01:03:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/12 22:22:55 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdio.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include "../../../includes/malloc_internal.h"
 
 # define LOG_PATH "../log/"
 # define LIBUNIT_BUFFER 256
@@ -86,5 +87,14 @@ void		child_cleanup(t_test_fds *fds);
 void		child_redirect(t_test_fds *fds, int fd_fileno);
 char		*child_release(t_test_fds *fds, int fd_fileno);
 int			child_cmp(t_test_fds *fds, int test_flags, int fd_fileno);
+
+//SECTION - malloc test utils function
+
+int			malloc_test(int len, size_t size);
+int			calloc_test(int len, size_t size);
+int			realloc_test(int len, size_t size);
+int			malloc_rng_test(int len, size_t size, int seed, int free_ratio);
+int			calloc_rng_test(int len, size_t size, int seed, int free_ratio);
+int			realloc_rng_test(int len, size_t size, int seed, int free_ratio);
 
 #endif
