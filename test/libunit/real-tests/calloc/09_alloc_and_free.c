@@ -6,7 +6,7 @@
 /*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/12 23:06:38 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/13 00:33:28 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/13 00:50:41 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 int	calloc_09_alloc_and_free(void)
 {
-	t_test_fds		data;
-
 	if (calloc_rng_test(42, 0, 1, 0) != 0)
 		return (-1);
 	return (0);

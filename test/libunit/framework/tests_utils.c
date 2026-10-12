@@ -6,7 +6,7 @@
 /*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 14:32:41 by alerusso42        #+#    #+#             */
-/*   Updated: 2026/10/12 23:59:34 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/13 00:58:13 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static int	_malloc_test(t_test *data)
 {
 	int	i;
 
+	malloc_munmap_data();
 	if (data->randomizer)
 		srand(data->randomizer);
 	data->ptrs = calloc(data->len, sizeof(void *));

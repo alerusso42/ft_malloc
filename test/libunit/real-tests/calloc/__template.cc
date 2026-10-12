@@ -3,8 +3,6 @@
 
 int	calloc_$counter$test(void)
 {
-	t_test_fds		data;
-
 	if (calloc_test(42, 0) != 0)
 		return (-1);
 	return (0);

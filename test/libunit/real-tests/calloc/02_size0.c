@@ -6,7 +6,7 @@
 /*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/12 22:40:01 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/13 00:30:51 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/13 00:50:41 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 int	calloc_02_size0(void)
 {
-	t_test_fds		data;
-
 	if (calloc_test(42, 0) != 0)
 		return (-1);
 	return (0);
