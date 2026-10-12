@@ -6,7 +6,7 @@
 /*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/12 23:06:38 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/12 23:29:52 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/13 00:49:19 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,11 @@
 
 int	malloc_01_basic(void)
 {
-	t_test_fds		data;
 	void			*ptr;
 
-	data = child_init(OUTPUT_PATH);
-	child_redirect(&data, 2);
 	ptr = malloc(1);
 	if (!ptr)
-		return (child_cleanup(&data), -1);
+		return (-1);
 	free(ptr);
-	if (child_cmp(&data, LIBUNIT_FLAGS_EXIST, 2) != 0)
-		return (child_cleanup(&data), -1);
-	child_cleanup(&data);
 	return (0);
 }

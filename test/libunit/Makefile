@@ -1,5 +1,5 @@
 NAME = libunit.a
-LIBUNIT =  $(addprefix framework/, cleanup.c  error.c  launch_test.c  load_test.c  print_test.c libft_utils.c child_output.c)
+LIBUNIT =  $(addprefix framework/, cleanup.c  error.c  launch_test.c  load_test.c  print_test.c libft_utils.c child_output.c tests_utils.c)
 OTHER = 
 SRC = $(LIBUNIT)
 OBJ_SRC = $(SRC:.c=.o)
@@ -20,19 +20,19 @@ $(NAME) : $(OBJ)
 
 clean: 
 	rm -f $(OBJ) $(OBJ_BONUS) *.out
-	$(MAKE) clean -C tests
-# 	$(MAKE) clean -C real-tests
+# 	$(MAKE) clean -C tests
+	$(MAKE) clean -C real-tests
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) fclean -C tests
-# 	$(MAKE) fclean -C real-tests
+# 	$(MAKE) fclean -C tests
+	$(MAKE) fclean -C real-tests
 
 re: fclean all
 
-check_tester:
-	@echo -e $(DIV) $(TABS) "TESTS" $(TABS) "\n" $(DIV)
-	-$(MAKE) test -C tests
+# check_tester:
+# 	@echo -e $(DIV) $(TABS) "TESTS" $(TABS) "\n" $(DIV)
+# 	-$(MAKE) test -C tests
 
 test: all
 	@echo -e $(DIV) $(TABS) "REAL-TESTS" $(TABS) "\n" $(DIV)
@@ -48,7 +48,7 @@ norm:
 
 #SECTION - script utils
 
-generate:
-	chmod +x ./create_tests.sh && ./create_tests.sh
+# generate:
+# 	chmod +x ./create_tests.sh && ./create_tests.sh
 
 .PHONY: all clean fclean re main gdb run valgrind val val_noflags

@@ -6,7 +6,7 @@
 /*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 14:32:41 by alerusso42        #+#    #+#             */
-/*   Updated: 2026/10/12 23:23:34 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/12 23:59:34 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int	malloc_test(int len, size_t size)
 	t_test	data;
 
 	_init_test_data(&data, len, size, F_MALLOC);
-	_malloc_test(&data);
+	return (_malloc_test(&data));
 }
 
 int	malloc_rng_test(int len, size_t size, int randomizer, int free_ratio)
@@ -161,7 +161,7 @@ int	malloc_rng_test(int len, size_t size, int randomizer, int free_ratio)
 	_init_test_data(&data, len, size, F_MALLOC);
 	data.randomizer = randomizer;
 	data.free_ratio = free_ratio;
-	_malloc_test(&data);
+	return (_malloc_test(&data));
 }
 
 int	calloc_test(int len, size_t size)
@@ -169,7 +169,7 @@ int	calloc_test(int len, size_t size)
 	t_test	data;
 
 	_init_test_data(&data, len, size, F_CALLOC);
-	_malloc_test(&data);
+	return (_malloc_test(&data));
 }
 
 int	calloc_rng_test(int len, size_t size, int randomizer, int free_ratio)
@@ -179,7 +179,7 @@ int	calloc_rng_test(int len, size_t size, int randomizer, int free_ratio)
 	_init_test_data(&data, len, size, F_CALLOC);
 	data.randomizer = randomizer;
 	data.free_ratio = free_ratio;
-	_malloc_test(&data);
+	return (_malloc_test(&data));
 }
 
 int	realloc_test(int len, size_t size)
@@ -187,7 +187,7 @@ int	realloc_test(int len, size_t size)
 	t_test	data;
 
 	_init_test_data(&data, len, size, F_REALLOC);
-	_malloc_test(&data);
+	return (_malloc_test(&data));
 }
 
 int	realloc_rng_test(int len, size_t size, int randomizer, int free_ratio)
@@ -197,5 +197,5 @@ int	realloc_rng_test(int len, size_t size, int randomizer, int free_ratio)
 	_init_test_data(&data, len, size, F_REALLOC);
 	data.randomizer = randomizer;
 	data.free_ratio = free_ratio;
-	_malloc_test(&data);
+	return (_malloc_test(&data));
 }

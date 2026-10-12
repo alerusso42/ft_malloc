@@ -7,7 +7,6 @@ SRC = main.c\
 	$(addprefix realloc/, $(shell ls realloc | grep '\.c' | grep -v __template.cc))
 NAME = test.out
 LIBUNIT = ../libunit.a
-PROJ_INC_DIR = -I ../../build/output/ -I ./
 PROJ_OBJ = ../
 OBJ = $(SRC:.c=.o)
 COMP = gcc -g -Wall -Werror -Wextra
@@ -16,7 +15,7 @@ all: $(NAME)
 	
 $(NAME) : $(LIBUNIT) $(OBJ) 
 	echo $(SRC)
-	$(COMP) $(OBJ) $(PROJ_OBJ) $(LIBUNIT) -o $(NAME)
+	$(COMP) $(OBJ) $(LIBUNIT) ../../../libft_malloc.so -o $(NAME)
 
 $(LIBUNIT):
 	$(MAKE) -C ../

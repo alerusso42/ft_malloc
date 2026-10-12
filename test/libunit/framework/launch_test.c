@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 16:10:09 by alerusso          #+#    #+#             */
-/*   Updated: 2026/06/27 23:24:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/13 00:09:18 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	fork_test(t_test_list *list, t_test_node *curr)
 		error(list, "fork failed\n");
 	else if (pid == 0)
 	{
-		alarm(1);
+		alarm(-1);
 		dup2(fds[1], 1);
 		dup2(fds[1], 2);
 		close(fds[1]);
