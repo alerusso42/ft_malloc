@@ -56,6 +56,7 @@ static void	*get_mem(t_alloc *dt, uint32_t size, t_list **zones, int zone_size)
 {
 	void	*ptr;
 
+	dt->bytes_alloc += size;
 	ptr = zone_area_alloc(*zones, size);
 	if (ptr)
 		return (ptr);

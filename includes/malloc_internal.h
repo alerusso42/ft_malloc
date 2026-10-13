@@ -6,7 +6,7 @@
 /*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/12 22:08:26 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/13 14:28:28 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,8 +194,8 @@ typedef struct s_alloc
 //SECTION - allocation metadata
 	void 		*ptr_max;
 	void 		*ptr_min;
-	uint64_t	bytes_alloc;
-	uint64_t	bytes_freed;
+	int64_t		bytes_alloc;
+	int64_t		bytes_mmaped;
 	uint32_t	header_size;
 	int			pagesize;
 	bool		error;

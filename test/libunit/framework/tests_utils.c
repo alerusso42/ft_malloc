@@ -6,7 +6,7 @@
 /*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 14:32:41 by alerusso42        #+#    #+#             */
-/*   Updated: 2026/10/13 00:58:13 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/13 14:04:24 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	_malloc_test(t_test *data)
 {
 	int	i;
 
-	malloc_munmap_data();
+	malloc_global_data()->bytes_alloc = 0;
 	if (data->randomizer)
 		srand(data->randomizer);
 	data->ptrs = calloc(data->len, sizeof(void *));
@@ -100,7 +100,6 @@ static void	*alloc(size_t size, t_func func, void *ptr)
 static int	_test_end(t_test *data, const char *err)
 {
 	uint64_t	b_alloc;
-	uint64_t	b_freed;
 
 	if (!data->ptrs)
 		return (ft_printf("out of memory\n"), 1);
@@ -113,11 +112,9 @@ static int	_test_end(t_test *data, const char *err)
 	if (err)
 		return (ft_printf(err), 1);
 	b_alloc = malloc_global_data()->bytes_alloc;
-	b_freed = malloc_global_data()->bytes_freed;
-	if (b_alloc != b_freed)
+	if (b_alloc)
 	{
-		ft_printf("leak[%d] =\nalloc[%d] -\nfreed[%d]\n", 
-			b_alloc - b_freed, b_alloc, b_freed);
+		ft_printf("leak of $Y%d$Z bytes\nINFO:\n", b_alloc);
 		show_alloc_mem_ex(MALL_SHOW_PRINT_HEX);
 		return (1);
 	}
