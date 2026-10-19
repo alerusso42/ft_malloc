@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/07 17:21:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/13 14:41:24 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,15 @@ void 	free(void *ptr)
 	switch (identify_area(data, ptr))
 	{
 		case (MEM_ALLOC) :
+			data->bytes_alloc -= 
+			((t_area *)(ptr - sizeof(t_area)))->next - sizeof(t_area);
 			zone = area_freed(ptr - sizeof(t_area));
 			munmap_zone_if_empty(data, zone);
-			break ;
-		case (MEM_FREED) :
-			WARNING("$RFree: $Z%p $Ralready freed$Z\n");
 			break ;
 		case (MEM_INVALID) :
 			free_correct_area(data, ptr);
 			break ;
-		case (MEM_NO_HEAP) :
-			WARNING("$RFree: $Z%p$R is not a heap ptr$Z\n");
-			break ;
-		case (MEM_ERROR) :
+		case (MEM_FREED) : case (MEM_NO_HEAP) : case (MEM_ERROR) :
 			break ;
 	}
 	thread_safe(MALL_THREAD_UNLOCK);
@@ -69,7 +65,7 @@ static void	free_correct_area(t_alloc *data, void *ptr)
 	}
 	else if (DEBUG_FLAG == false)
 	{
-		// VALGRIND_FREELIKE_BLOCK((void *)area + sizeof(t_area), 0);
+		VALGRIND_FREELIKE_BLOCK((void *)area + sizeof(t_area), 0);
 	}
 }
 
@@ -92,6 +88,4 @@ static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 	if (zone->node.next)
 		zone->node.next->prev = zone->node.prev;
 	munmap_syscall(data, zone, zone->size);
-	// if (!data->zone_tiny && !data->zone_small && !data->zone_large)
-	// 	return (malloc_munmap_data());
 }

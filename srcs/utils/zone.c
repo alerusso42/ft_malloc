@@ -6,7 +6,7 @@
 /*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:31:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/28 16:31:04 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/13 14:08:27 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 	new_zone->size = round_page(size, data->pagesize);
 	new_zone->node.content = new_zone;
 	lst_front(zones, &new_zone->node);
-	data->bytes_alloc += size + sizeof(t_memzone);
 	DEBUG("zone add ok.. returning %p\n", new_zone->node);
 	return (&new_zone->node);
 }

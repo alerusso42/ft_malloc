@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/07 17:30:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/13 13:54:52 by alerusso42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	*mmap_syscall(t_alloc *data, uint32_t len)
 		data->ptr_max = ptr + len;
 	if (data->ptr_min > ptr)
 		data->ptr_min = ptr;
-	data->bytes_alloc += len;
-	// if (DEBUG_FLAG == true)
-	// 	VALGRIND_MALLOCLIKE_BLOCK(ptr, len, 0, false);
+	data->bytes_mmaped += len;
+	if (DEBUG_FLAG == true)
+		VALGRIND_MALLOCLIKE_BLOCK(ptr, len, 0, false);
 	return (ptr);
 }
 
@@ -72,9 +72,9 @@ bool	munmap_syscall(t_alloc *data, void *ptr, uint32_t len)
 	PRINT("$Ymunmap$Z: deallocating %d bytes from $B%p$Z\n", len, ptr);
 	if (munmap(ptr, len) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	data->bytes_freed += len;
-	// if (DEBUG_FLAG == true)
-	// 	VALGRIND_FREELIKE_BLOCK(ptr, 0);
+	data->bytes_mmaped -= len;
+	if (DEBUG_FLAG == true)
+		VALGRIND_FREELIKE_BLOCK(ptr, 0);
 	return (EXIT_SUCCESS);
 }
 
@@ -86,11 +86,17 @@ uint32_t	identify_area(t_alloc *data, void *ptr)
 	if (data->error || !ptr)
 		return (MEM_ERROR);
 	if (ptr < data->ptr_min || ptr > data->ptr_max)
+	{
+		WARNING("$RFree: $Z%p$R is not a heap ptr$Z\n", ptr);
 		return (MEM_NO_HEAP);
+	}
 	area = ptr - sizeof(t_area);
 	if (align_addr(ptr) != ALIGN || (area->info & (~MEM_FLAGS)) != 0)
 		return (MEM_INVALID);
 	else if (area->info & MEM_FREED)
+	{
+		WARNING("$RFree: $Z%p $Ralready freed$Z\n", ptr);
 		return (MEM_FREED);
+	}
 	return (MEM_ALLOC);
 }
