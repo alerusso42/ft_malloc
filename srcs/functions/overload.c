@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   overload.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 23:22:49 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/29 11:28:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/19 10:10:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void 	*reallocarray(void *ptr, size_t nmemb, size_t size)
 {
 	size_t	total;
 
+	err_printf("reallocarray call\n");
 	if (nmemb && SIZE_MAX / nmemb < size)
 	{
 		WARNING("reallocarray: %u * %u overflows\n", nmemb, size);
@@ -33,7 +34,7 @@ void 	*reallocarray(void *ptr, size_t nmemb, size_t size)
 // align size using alignment. Then it's equal to a malloc call
 void	*memalign(size_t alignment, size_t size)
 {
-	ft_printf("memalign\n");
+	err_printf("memalign call\n");
 	if (alignment < sizeof(void *) || (alignment & (alignment - 1)) != 0)
 	{
 		WARNING("memalign: alignment %u must be pow of 2, >= sizeof(ptr)\n", \
@@ -47,20 +48,20 @@ void	*memalign(size_t alignment, size_t size)
 // equal to a malloc call
 void	*valloc(size_t size)
 {
-	ft_printf("valloc\n");
+	err_printf("valloc call\n");
 	return (malloc(size));
 }
 
 // equal to a malloc call
 void	*pvalloc(size_t size)
 {
-	ft_printf("pvalloc\n");
+	err_printf("pvalloc call\n");
 	return (malloc(size));
 }
 
 // equal to a malloc call
 void	*xmalloc(size_t size)
 {
-	ft_printf("xmalloc\n");
+	err_printf("xmalloc call\n");
 	return (malloc(size));
 }

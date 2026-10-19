@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/02 14:12:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/19 10:07:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void 	*realloc(void *ptr, size_t size)
 	t_alloc		*data;
 	t_area		*area;
 
-	err_printf("<%u", size);
 	if (!ptr)
 		return (malloc(size));
 	if (size == 0)
@@ -70,5 +69,5 @@ static inline void	*expand_mem(void *ptr, size_t size)
 	if (!new_ptr)
 		return (free(ptr), fatal_malloc("Realloc failure"));
 	ft_memcpy(new_ptr, ptr, size);
-	return (free(ptr), ft_printf(">\n"), new_ptr);
+	return (free(ptr), new_ptr);
 }
