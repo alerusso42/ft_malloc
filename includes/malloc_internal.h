@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/13 14:28:28 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/20 11:31:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 # include <pthread.h>
 # include "../Libft/libft.h"
 
-# define DEBUG_FLAG false
-# define DEBUG_TIMESTAMP "$GMalloc: $Z"
+# define DEBUG_FLAG true
+# define DEBUG_TIMESTAMP "===> "
 # if DEBUG_FLAG == true
-#  define DEBUG(s, ...) (void)ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
+#  define DEBUG(s, ...) (void)err_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define DEBUG(s, ...)	(void)0
 # endif

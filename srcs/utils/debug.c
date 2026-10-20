@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:11:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/28 15:26:44 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/20 11:30:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_zone(t_memzone *zone)
 
 	if (DEBUG_FLAG == false)
 		return ;
-	DEBUG("$Mprint zone %p:\n$Z", zone);
+	PRINT("$Mprint zone %p:\n$Z", zone);
 	ft_printf("$Z{$Ysize$Z = %d}{$Glc$Z = %d}{$Bbf = %d$Z}\n", \
 	zone->size, zone->longest_chunk, zone->blocks_freed);
 	ft_printf("$Marea list:\n$Z", zone);

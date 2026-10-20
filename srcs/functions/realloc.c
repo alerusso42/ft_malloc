@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/19 10:07:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/20 11:23:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void 	*realloc(void *ptr, size_t size)
 		size = ALIGN;
 	thread_safe(MALL_THREAD_LOCK);
 	data = malloc_global_data();
-	DEBUG("REALLOC!\n$Ysize request$Z: %d\n$Yptr$Z: %p\n", size, ptr);
+	DEBUG("Realloc, $Ysize request$Z: %d, $Yptr$Z: %p: ", size, ptr);
 	switch (identify_area(data, ptr))
 	{
 		case (MEM_ALLOC) :
 			area = ptr - sizeof(t_area);
 			if (area->next - sizeof(t_area) >= size)
-				return (thread_safe(MALL_THREAD_UNLOCK), err_printf(">\n"), ptr);
+				return (DEBUG("ok\n"), thread_safe(MALL_THREAD_UNLOCK), ptr);
 			return (expand_mem(ptr, size));
 		case (MEM_FREED) :
 			WARNING("$RRealloc: $Z%p $Ralready freed$Z\n");
@@ -51,6 +51,7 @@ void 	*realloc(void *ptr, size_t size)
 			WARNING("$RRealloc: $Z%p$R is not a heap ptr$Z\n");
 			break ;
 	}
+	DEBUG("ok\n");
 	return (thread_safe(MALL_THREAD_UNLOCK), NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:17 by alerusso          #+#    #+#             */
-/*   Updated: 2026/09/29 11:26:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/20 11:22:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void 	*calloc(size_t nmemb, size_t size)
 	void		*ptr;
 	uintptr_t	area;
 
-	DEBUG("CALLOC\n$Ysize request$Z: %d\n$Ynmemb$Z: %p\n", size, nmemb);
+	thread_safe(MALL_THREAD_LOCK);
+	DEBUG("Calloc, $Ysize request$Z: %d, $Ynmemb$Z: %p: ", size, nmemb);
 	if (nmemb && SIZE_MAX / nmemb < size)
 	{
 		WARNING("calloc: %u * %u overflows\n", nmemb, size);
@@ -32,12 +33,13 @@ void 	*calloc(size_t nmemb, size_t size)
 		total = ALIGN;
 	else
 		total = nmemb * size;
+	thread_safe(MALL_THREAD_UNLOCK);
 	ptr = malloc(total);
 	if (!ptr)
 		return (NULL);
 	ft_memset(ptr, 0, total);
 	area = ((uintptr_t)ptr) - sizeof(t_area);
 	((t_area *)area)->info |= MEM_SET;
-	DEBUG("$GCalloc success.$Z");
+	DEBUG("ok\n");
 	return (ptr);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   overload.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 23:22:49 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/19 10:10:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/20 11:24:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void 	*reallocarray(void *ptr, size_t nmemb, size_t size)
 {
 	size_t	total;
 
-	err_printf("reallocarray call\n");
+	DEBUG("Reallocarray call\n");
 	if (nmemb && SIZE_MAX / nmemb < size)
 	{
 		WARNING("reallocarray: %u * %u overflows\n", nmemb, size);
@@ -34,7 +34,7 @@ void 	*reallocarray(void *ptr, size_t nmemb, size_t size)
 // align size using alignment. Then it's equal to a malloc call
 void	*memalign(size_t alignment, size_t size)
 {
-	err_printf("memalign call\n");
+	DEBUG("memalign call\n");
 	if (alignment < sizeof(void *) || (alignment & (alignment - 1)) != 0)
 	{
 		WARNING("memalign: alignment %u must be pow of 2, >= sizeof(ptr)\n", \
@@ -48,7 +48,7 @@ void	*memalign(size_t alignment, size_t size)
 // equal to a malloc call
 void	*valloc(size_t size)
 {
-	err_printf("valloc call\n");
+	DEBUG("valloc call\n");
 	return (malloc(size));
 }
 

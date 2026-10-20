@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/13 14:41:24 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/20 11:21:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void 	free(void *ptr)
 	t_memzone	*zone;
 
 	thread_safe(MALL_THREAD_LOCK);
-	DEBUG("FREE\n$Yptr$Z: %p\n", ptr);
+	DEBUG("Free, $Yptr$Z: %p: ", ptr);
 	data = malloc_global_data();
 	switch (identify_area(data, ptr))
 	{
@@ -41,6 +41,7 @@ void 	free(void *ptr)
 		case (MEM_FREED) : case (MEM_NO_HEAP) : case (MEM_ERROR) :
 			break ;
 	}
+	err_printf("ok\n");
 	thread_safe(MALL_THREAD_UNLOCK);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:31:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/13 14:08:27 by alerusso42       ###   ########.fr       */
+/*   Updated: 2026/10/20 11:30:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	*zone_area_alloc(t_list *zones, uint32_t size)
 		zone = (t_memzone *)zones->content;
 		if (zone->longest_chunk >= size)
 		{
-			DEBUG("zone okkk.. %d\n", zone->first_free_area);
+			PRINT("zone okkk.. %d\n", zone->first_free_area);
 			area = zone->first_free_area;
 			area = area_find_alloc_block(area, size);
-			DEBUG("zone found!!.. %d\n", area->next);
+			PRINT("zone found!!.. %d\n", area->next);
 			area_alloc(zone, area, size);
-			DEBUG("zone alloc..");
+			PRINT("zone alloc..");
 			return (((void *)area) + sizeof(t_area));
 		}
 		zones = zones->next;
@@ -67,11 +67,11 @@ t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 	t_memzone	*new_zone;
 	void		*ptr;
 
-	DEBUG("zone add..\n");
+	PRINT("zone add..\n");
 	ptr = mmap_syscall(data, size + sizeof(t_area));
 	if (!ptr)
 		return (error_malloc("zone_add: can't allocate memory\n"));
-	DEBUG("zone add ok alloc..\n");
+	PRINT("zone add ok alloc..\n");
 	new_zone = ptr;
 	*new_zone = (t_memzone){0};
 	new_zone->empty = true;
@@ -85,7 +85,7 @@ t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 	new_zone->size = round_page(size, data->pagesize);
 	new_zone->node.content = new_zone;
 	lst_front(zones, &new_zone->node);
-	DEBUG("zone add ok.. returning %p\n", new_zone->node);
+	PRINT("zone add ok.. returning %p\n", new_zone->node);
 	return (&new_zone->node);
 }
 

@@ -26,6 +26,7 @@ void 	*malloc(size_t size)
 	if (size == 0)
 		size = ALIGN;
 	data = malloc_global_data();
+	DEBUG("malloc: ");
 	if (data->error)
 		return (thread_safe(MALL_THREAD_UNLOCK), NULL);
 	if (size > data->size_area.large)
@@ -40,8 +41,9 @@ void 	*malloc(size_t size)
 	{
 		VALGRIND_MALLOCLIKE_BLOCK(ptr, size, 0, false);
 	}
-	thread_safe(MALL_THREAD_UNLOCK);
+	err_printf("Ok\n");
 	DEBUG("$Ysize request$Z: %d\n$Yreturned ptr$Z: %p\n", size, ptr);
+	thread_safe(MALL_THREAD_UNLOCK);
 	return (ptr);
 }
 
