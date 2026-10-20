@@ -6,13 +6,13 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/20 11:23:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/20 12:36:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/malloc_internal.h"
 
-static inline void	*expand_mem(void *ptr, size_t size);
+static inline void	*expand_mem(void *ptr, size_t size, size_t prev_size);
 
 /// @brief expand ptr memory. 
 ///			If size <= ptr.size, realloc does nothing.
@@ -39,14 +39,14 @@ void 	*realloc(void *ptr, size_t size)
 			area = ptr - sizeof(t_area);
 			if (area->next - sizeof(t_area) >= size)
 				return (DEBUG("ok\n"), thread_safe(MALL_THREAD_UNLOCK), ptr);
-			return (expand_mem(ptr, size));
+			return (expand_mem(ptr, size, area->next - sizeof(t_area)));
 		case (MEM_FREED) :
 			WARNING("$RRealloc: $Z%p $Ralready freed$Z\n");
 			thread_safe(MALL_THREAD_UNLOCK);
 			return (malloc(size));
 		case (MEM_INVALID) :
 			WARNING("$RRealloc: $Zinvalid ptr\n");
-			return (expand_mem(ptr, size));
+			return (expand_mem(ptr, size, 0));
 		case (MEM_NO_HEAP) :
 			WARNING("$RRealloc: $Z%p$R is not a heap ptr$Z\n");
 			break ;
@@ -60,15 +60,15 @@ void 	*realloc(void *ptr, size_t size)
 /// @param ptr ptr to the start of the old memory
 /// @param size bytes of the old memory
 /// @return aligned ptr of heap memory, NULL if an error occurred
-static inline void	*expand_mem(void *ptr, size_t size)
+static inline void	*expand_mem(void *ptr, size_t size, size_t prev_size)
 {
 	void		*new_ptr;
 
 	thread_safe(MALL_THREAD_UNLOCK);
 	DEBUG("$GRealloc expand mem.$Z");
-	new_ptr = malloc(size + 1);
+	new_ptr = malloc(size);
 	if (!new_ptr)
 		return (free(ptr), fatal_malloc("Realloc failure"));
-	ft_memcpy(new_ptr, ptr, size);
+	ft_memcpy(new_ptr, ptr, prev_size);
 	return (free(ptr), new_ptr);
 }

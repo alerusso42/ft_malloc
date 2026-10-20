@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:59:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 16:44:15 by codespace        ###   ########.fr       */
+/*   Updated: 2026/10/20 12:33:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ int main(int argc, char *argv[])
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	void	*pointer;
+	size_t	i;
 
+	i = n;
 	if ((!dest) && (!src))
 		return (NULL);
 	pointer = dest;
-	while ((n--) && (dest))
+	while ((i--) && (dest))
 	{
 		*((char *)dest) = *((char *)src);
 		++dest;

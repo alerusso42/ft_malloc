@@ -15,7 +15,10 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include <stddef.h>
-# define MALLOC_WARNINGS false
+
+# define PRINT_FLAG false
+# define DEBUG_FLAG false
+# define WARNING_FLAG true
 
 typedef struct s_alloc	t_alloc;
 

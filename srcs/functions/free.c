@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/20 11:21:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/20 11:41:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void 	free(void *ptr)
 		case (MEM_FREED) : case (MEM_NO_HEAP) : case (MEM_ERROR) :
 			break ;
 	}
-	err_printf("ok\n");
+	DEBUG("ok\n");
 	thread_safe(MALL_THREAD_UNLOCK);
 }
 

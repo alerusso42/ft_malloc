@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/20 11:31:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/20 12:25:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,21 @@
 # include <pthread.h>
 # include "../Libft/libft.h"
 
-# define DEBUG_FLAG true
 # define DEBUG_TIMESTAMP "===> "
+# define PRINT_TIMESTAMP "$GMalloc: $Z"
+# define WARNING_TIMESTAMP "===> $RMalloc warning: $Z"
 # if DEBUG_FLAG == true
 #  define DEBUG(s, ...) (void)err_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define DEBUG(s, ...)	(void)0
 # endif
-# define PRINT_FLAG false
-# define PRINT_TIMESTAMP "$GMalloc: $Z"
 # if PRINT_FLAG == true
-#  define PRINT(s, ...) (void)ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
+#  define PRINT(s, ...) (void)ft_printf(PRINT_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define PRINT(s, ...)	(void)0
 # endif
-# if MALLOC_WARNINGS == true
-#  define WARNING(s, ...) (void)err_printf(s, ##__VA_ARGS__)
+# if WARNING_FLAG == true
+#  define WARNING(s, ...) (void)err_printf(WARNING_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define WARNING(s, ...)	(void)0
 # endif

@@ -48,3 +48,6 @@ re: fclean $(NAME)
 
 libft:
 	(cd Libft/ && make string && cp libft.a $$OLDPWD/build && make fclean)
+
+gdb_test: 
+	gdb -q -x test/gdb_setup.gdb --args bash

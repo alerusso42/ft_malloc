@@ -41,7 +41,6 @@ void 	*malloc(size_t size)
 	{
 		VALGRIND_MALLOCLIKE_BLOCK(ptr, size, 0, false);
 	}
-	err_printf("Ok\n");
 	DEBUG("$Ysize request$Z: %d\n$Yreturned ptr$Z: %p\n", size, ptr);
 	thread_safe(MALL_THREAD_UNLOCK);
 	return (ptr);
