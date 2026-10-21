@@ -3,17 +3,11 @@
 # this test creates a new shell that uses my malloc implementation
 # ⚠️ currently this test does not work (debug state)
 
-NAME="libft_malloc.so"
+NAME="$PWD/../libft_malloc.so"
 LIBFT="libft.a"
 DEBUG=""
 
 # set -x
-
-cleanup()
-{
-	rm -f libft_malloc.so
-	rm -rf ../build
-}
 
 error()
 {
@@ -34,10 +28,6 @@ usage()
 
 parse_flags()
 {
-	# local	PRELOAD_EXIST
-
-	# PRELOAD_EXIST=$(env | grep LD_PRELOAD)
-	# test "$PRELOAD_EXIST" != "" && error "A library is already preload."
 	for x in "$@"; do
 		test "$x" == "--debug" && DEBUG="LD_DEBUG=libs"
 		test "$x" == "--help" && usage
@@ -45,14 +35,11 @@ parse_flags()
 }
 
 # 1)    compilation
-(cd ../ && make > /dev/null)
-cp > /dev/null ../$NAME ../build/$LIBFT . || \
-(echo compiling... ; make > /dev/null && cp build/libft.a libft_malloc.so test/ || error "Libft compilation")
-
+(cd ../ && make > /dev/null) || error "Compilation error"
 # 2)	parse flags and export library
 
 parse_flags "$@"
-export LD_PRELOAD="$PWD/$NAME"
+export LD_PRELOAD="$NAME"
 test "$DEBUG" != "" && export LD_DEBUG=libs
 
 # 3)	run bash
