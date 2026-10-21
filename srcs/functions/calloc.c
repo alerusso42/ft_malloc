@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:17 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/20 11:22:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/21 22:46:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void 	*calloc(size_t nmemb, size_t size)
 	if (nmemb && SIZE_MAX / nmemb < size)
 	{
 		WARNING("calloc: %u * %u overflows\n", nmemb, size);
-		return (NULL);
+		return (thread_safe(MALL_THREAD_UNLOCK), NULL);
 	}
 	if (!nmemb || !size)
 		total = ALIGN;
@@ -37,9 +37,9 @@ void 	*calloc(size_t nmemb, size_t size)
 	ptr = malloc(total);
 	if (!ptr)
 		return (NULL);
+	thread_safe(MALL_THREAD_LOCK);
 	ft_memset(ptr, 0, total);
 	area = ((uintptr_t)ptr) - sizeof(t_area);
 	((t_area *)area)->info |= MEM_SET;
-	DEBUG("ok\n");
-	return (ptr);
+	return (DEBUG("ok\n"), thread_safe(MALL_THREAD_UNLOCK), ptr);
 }

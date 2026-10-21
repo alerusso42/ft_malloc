@@ -30,7 +30,7 @@ void 	*malloc(size_t size)
 	if (data->error)
 		return (thread_safe(MALL_THREAD_UNLOCK), NULL);
 	if (size > data->size_area.large)
-		return (thread_safe(MALL_THREAD_UNLOCK), error_malloc("request size too large"));
+		return (error_malloc("size too large"), thread_safe(MALL_THREAD_UNLOCK), NULL);
 	else if (size > data->size_area.small)
 		ptr = get_mem(data, size, &data->zone_large, data->header_size + size);
 	else if (size > data->size_area.tiny)

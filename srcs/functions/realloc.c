@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/10/20 12:36:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/10/21 22:50:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void 	*realloc(void *ptr, size_t size)
 			return (expand_mem(ptr, size, area->next - sizeof(t_area)));
 		case (MEM_FREED) :
 			WARNING("$RRealloc: $Z%p $Ralready freed$Z\n");
-			thread_safe(MALL_THREAD_UNLOCK);
-			return (malloc(size));
+			return (thread_safe(MALL_THREAD_UNLOCK), malloc(size));
 		case (MEM_INVALID) :
 			WARNING("$RRealloc: $Zinvalid ptr\n");
 			return (expand_mem(ptr, size, 0));
@@ -64,11 +63,13 @@ static inline void	*expand_mem(void *ptr, size_t size, size_t prev_size)
 {
 	void		*new_ptr;
 
-	thread_safe(MALL_THREAD_UNLOCK);
 	DEBUG("$GRealloc expand mem.$Z");
+	thread_safe(MALL_THREAD_UNLOCK);
 	new_ptr = malloc(size);
 	if (!new_ptr)
 		return (free(ptr), fatal_malloc("Realloc failure"));
+	thread_safe(MALL_THREAD_LOCK);
 	ft_memcpy(new_ptr, ptr, prev_size);
+	thread_safe(MALL_THREAD_UNLOCK);
 	return (free(ptr), new_ptr);
 }
